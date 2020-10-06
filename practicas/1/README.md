@@ -51,6 +51,16 @@ Si tu nombre de usuario es `fulano`, tendrás que hacer algo como:
 
     $ git clone git@github.com:fulano/sistop-2021-1.git
 
+Ojo, en caso de que tengas algún problema haciéndolo de esta manera,
+también puedes intentar de la siguiente manera:
+
+    $ git clone https://github.com/fulano/sistop-2021-1
+
+La ventaja del primero es un poco mayor velocidad al realizar las
+operaciones y que puedes manejar *autenticación por llave pública*; es
+más cómodo de manejar. La ventaja del segundo es que funciona en
+algunos entornos donde el primero no.
+
 Eso traerá una copia del repositorio a tu computadora, desde donde
 podrás trabajar.
 
