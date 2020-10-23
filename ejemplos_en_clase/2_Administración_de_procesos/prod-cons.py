@@ -38,8 +38,10 @@ buff_lleno = threading.Semaphore(maxlen - 1)
 class Evento:
     def __init__(self):
         print("Generando evento")
+        time.sleep(random.random())
     def process(self):
         print("Procesando evento")
+        time.sleep(random.random())
 
 threading.Thread(target=productor, args=[1]).start()
 threading.Thread(target=productor, args=[1]).start()
