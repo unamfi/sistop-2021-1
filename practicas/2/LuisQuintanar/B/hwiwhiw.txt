@@ -1,0 +1,106 @@
+;La función 0Ah funciona de la misma manera
+;Cuando se ejecuta, se lee un string con el máximo que le pongas
+;Automáticamente se crea un arreglo de esta manera, la cual está apuntada por buf
+
+;HOLA
+;1E 04 68 6F 6C 61 0D
+
+;Donde la primera posición es el tamaño máximo (30 en hexadecimal)
+;La segunda posición es el tamaño del string (04 en el caso de HOLA)
+;Los 4 siguientes son los valores ascii de las letras de tu string (puedes comprobarlo)
+;Y el 0D marca el final de tu palabra
+
+
+
+
+
+.model small
+.stack
+.data
+buf	db	30		;Aquí enviará tamaño máximo
+tlee	db	?		;Aquí recibirá tamaño leído
+cadena	db	30 dup(?)	;Aquí estará la cadena 
+msg db 10,13, "Ingrese el nombre: ",'$';ingrese el nombre
+.code
+main:	
+mov ax,@data
+	mov ds,ax
+	mov ah,9h
+	lea dx, msg
+	int 21h
+	
+	mov dx,offset buf
+	mov ah,0Ah			;Aquí se invoca la función
+	int 21h				;Aquí se ejecuta
+
+	call retorn			;Retorn es una función para imprimir un salto de línea
+	mov bx,offset buf	;Aquí BX apunta a buf, o sea al arreglo de arriba
+	inc bx 				;Aquí se incrementa para apuntar al tamaño del arreglo (04)
+	mov dx,[bx]			;Aquí mueves en el registo de datos el contenido de buff ([bx] representa a el contenido del apuntador)
+	mov cl,dl			;Aquí haces una copia de la longitud para poder hacer el ciclo que imprima la palabra 
+	call des2			;Des2 es una función creada por mí para imprimir los números en hexadecimal
+	inc bx			
+	call retorn
+
+ciclo:
+	mov ax,[bx]			;Respaldas la letra del arreglo aquí
+	mov dl,al  			;Aquí mueves la letra al segmento de datos(DX) para poder imprimir
+	mov ah,02h			;Funcion 02 para imprimir caracteres	
+	int 21h				;Ejecución de la función
+	call retorn 		;Salto de línea
+	inc BX				;Se incrementa al siguiente letra del arreglo
+    cmp al, "1"         ;Comparación al detectar el 1, rompe el ciclo
+    ;cmp bx,1eh
+    je fin              ;Salto con comparación, envía a fin
+
+	loop ciclo	
+
+
+
+retorn:   ; Hace un CR y LF
+              
+        push ax
+        push dx
+        mov ah,2 ; Servicio para imprimir un caracter
+        mov dl,13 ; Caracter 13 = CR
+        int 21h ; Llamar a DOS
+        mov dl,10 ; Caracter 10 = LF
+        int 21h ; Llamar a DOS
+        pop dx
+        pop ax
+        ret 
+
+
+des1:	
+		add dl,30h
+		cmp dl,39h
+		jg mayor
+		mov ah,02h
+		int 21h
+		ret
+
+mayor:	
+		add dl,07h
+		mov ah,02h
+		int 21h
+		ret
+
+des2:
+		push bx
+		push cx
+		mov bl,dl
+		mov cl,04h
+		shr dl,cl
+		call des1
+		mov dl,bl
+		and dl,0fh
+		call des1
+		pop cx
+		pop bx
+		ret
+ 
+fin:
+     mov ah,07h
+     int 21h 
+ 
+end
