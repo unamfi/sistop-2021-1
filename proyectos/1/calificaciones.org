@@ -1,0 +1,241 @@
+#+title: Proyecto 1 • Calificaciones y comentarios
+#+options: toc:nil
+
+Como el nivel de complejidad de este proyecto es muy bajo (únicamente
+un control de lectura), muchos de ustedes no tendrán comentarios a su
+envío. Estaba dándoles un "buen resumen" uno por uno... Pero si el 90%
+lo tiene, creo que podemos omitirlo 😉
+
+* Open Source Firmware
+
+** Miguel Aguilar
+ - Documento :: [[./AguilarMiguel/Proyecto_1_Open_Source_Firmware.pdf][Proyecto_1_Open_Source_Firmware.pdf]]
+ - Comentarios ::
+   - Tu mapa cubre bien, me parece, los conceptos abordados en el artículo
+   - Acá es ya cuestión de gustos, y no te penalizo por ello; yo
+     prefiero que los mapas conceptuales no sólo presenten la
+     etiqueta, sino que un breve texto para ayudar a su
+     lectura/comprensión a “ojo de águila”
+ - Calificación :: 10
+
+** Enrique Albores
+ - Documento :: [[./AlboresEnrique/Proyecto1.docx][Proyecto1.docx]]
+ - Comentarios ::
+   - ¡Ojo! Dices que “el firmware vive en el SSD/HD”. No estoy seguro
+     de cómo lo presenta el artículo, pero la definición original es
+     /casi/ lo opuesto
+     - /Firmware/ es el software grabado en hardware — De ahí el
+       nombre, viene /en firme/.
+     - Claro, ha cambiado con las décadas... Primero se volvió
+       /actualizable/, con los EEPROMs, y ahora para muchos
+       dispositivos, se distribuye como acompañante del controlador
+       (necesariamente como software).
+     - Pero esto no puede aplicarse a algunos componentes que menciona
+       el artículo — por ejemplo y muy particularmente, al arranque
+       del sistema. Ese tiene que estar sí o sí en EEPROM, o algún
+       tipo de RAM no volátil.
+ - Calificación :: 10
+
+** Jonathan Calzada
+ - Documento :: [[./CalzadaJonathan/FirmewareDeCodigoAbierto_Calzada_MartinezJonathan.png][FirmewareDeCodigoAbierto_Calzada_MartinezJonathan.png]]
+ - Comentarios ::
+   - ¡Muy buen resumen!
+ - Calificación :: 10
+
+** Tonatiuh Rodríguez
+ - Documento :: [[./RodríguezTonatiuh/firmware_de_código_abierto.pdf][firmware_de_código_abierto.pdf]]
+ - Comentarios ::
+   - El mapa conceptual es bastante completo.
+     - Posiblemente, en tanto resumen, te sugeriría incluir /menos/
+       texto en cada nodo. Estoy viendo tu mapa en un monitor de
+       2560×1440, y aún así tengo que irme desplazando...
+   - Como comentario sobre la herramienta /XMind/ que empleas: Su
+     marca de agua (las diagonales punteadas de fondo) son bastante
+     molestas, parecerían vértices a seguir
+     - Y te generó algunos vértices innecesariamente largos y
+       sinuosos, como el que une a “La situación está mejorando” con
+       “Firmware de código abierto”. No sé qué tanto esto sea culpa de
+       la herramienta o posicionado expresamente por ti...
+ - Calificación :: 10
+
+** Francine Ochoa
+ - Documento :: [[./OchoaFrancine/Articulo 1 Open Source Firmware.pdf][Articulo 1 Open Source Firmware.pdf]]
+ - Comentarios ::
+   - ¿Dos artículos? Guau... Entendiste mal mi planteamiento (¡pedí
+     uno!), pero... bueno, abona a una muy buena calificación. ¡Espero
+     que te hayan parecido interesantes!
+ - Calificación :: 10
+
+** Vásquez Mario
+ - Documento :: [[./VasquezMario/Proyecto1.pdf][Proyecto1.pdf]]
+ - Comentarios ::
+   - ¡Muy buen resumen!
+ - Calificación :: 10
+
+** Vázquez René
+ - Documento :: [[./VazquezRene/Proyecto1.pdf][Proyecto1.pdf]]
+ - Comentarios ::
+   - Te centras en uno de los ejes del artículo, los niveles de
+     privilegio, pero dejas fuera a muchos conceptos importantes
+     (p.ej. UEFI, el modelo de confianza utilizado, todo lo
+     relacionado a firmware de periféricos (no central para el
+     sistema), etc.
+   - Como mapa conceptual, me parece difícil de “navegar”
+     - No todas las /ramas/ de /Niveles de privilegio/ corresponden
+       ahí, o no al mismo nivel
+     - Los conceptos de la 2ª página están sólo enunciados, no ligados
+       al resto de los conceptos
+ - Calificación :: 9
+
+** Erik Zepeda
+ - Documento :: [[./ZepedaErik/Proyecto1/proyecto1.pdf][proyecto1.pdf]]
+ - Comentarios ::
+   - Un verdadero mapa de carreteras 😉 Eso sí, ¡qué increible
+     caligrafía / organización en papel! Yo sería sin duda incapaz de
+     hacer algo similar.
+     - No me resulta directamente claro cómo ensamblar los fragmentos,
+       y me parece que hay partes de texto perdidas del scanneo. ¡Sé
+       más cuidadoso con eso!
+     - Pero, dado que este trabajo lo planteé directamente como un
+       /control de lectura/, me queda claro que hiciste una lectura
+       completa y con buen nivel de comprensión.
+ - Calificación :: 9
+
+* What's new in CPUs since the 80s?
+
+** Francine Ochoa
+ - Documento :: [[./OchoaFrancine/Articulo 2 What's new in CPUs since the 80s?.pdf][Articulo 2 What's new in CPUs since the 80s?.pdf]]
+ - Comentarios ::
+   - ¿Dos artículos? Guau... Entendiste mal mi planteamiento (¡pedí
+     uno!), pero... bueno, abona a una muy buena calificación. ¡Espero
+     que te hayan parecido interesantes!
+   - El mapa que hiciste para este segundo artículo es mucho más
+     limitado que el del anterior; tomo para tu calificacíón el de
+     “Open Source Firmware”
+     - En este te enfocaste únicamente en el apartado de /Memoria/.
+
+* C is not a low-level language
+
+** Diego Armenta
+ - Documento :: [[./ArmentaDiego/Proyecto1_SO.jpg][Proyecto1_SO.jpg]]
+ - Comentarios ::
+   - Buen manejo del idioma. La entrega podía ser en español, pero me
+     da gusto ver que la hicieras en inglés -- ¡y que sea bastante
+     legible! ☺
+ - Calificación :: 10
+
+** David Guerrero y Adolfo Marcelo 
+ - Documento :: [[./GuerreroDavid-MarceloAdolfo/C no es un lenguaje de bajo nivel.pdf][C no es un lenguaje de bajo nivel.pdf]]
+ - Calificación :: 10
+
+** Javier Montiel y Carolina Rodríguez
+ - Documento :: [[./MontielJavier-RodriguezCarolina/C_no_es_un_lenguaje_de_bajo_nivel.pdf][C_no_es_un_lenguaje_de_bajo_nivel.pdf]]
+ - Comentarios ::
+   - Revisen la herramienta en que generaron el diagrama: El resultado
+     es un poco difícil de leer
+     - Les generó una imagen y la “colgó” en la hoja para formar un
+       PDF; un PDF está hecho para soportar mejor contenido vectorial
+     - Si lo van a hacer a partir de una imagen, conviene usar un
+       formato de compresión sin pérdida, como =PNG=; esta imagen
+       parece ser comprimida como =JPEG= (que debe usarse únicamente
+       para contenido fotográfico o similar)
+     - Y en todo caso, todo esto se vale... Pero si el contraste del
+       texto es mayor; a bajo contraste, debemos elegir un algoritmo
+       adecuado.
+   - ¡Ojo con la ortografía! (+ilución+ → /ilusión/, +al rededor+ → /alrededor/)
+ - Calificación :: 10
+
+** David Ruiz
+ - Documento :: [[./RuizDavid/PRSDSO.pdf][PRSDSO.pdf]]
+ - Comentarios ::
+ - Calificación :: 10
+
+* Tearing apart =printf()=
+
+** Daniel Cruz
+ - Documento :: [[./CruzDaniel/MapaConceptual.pdf][MapaConceptual.pdf]]
+ - Comentarios ::
+   - Cada vez que dices /librería/ para referirte a una /biblioteca/,
+     Dios mata a un gatito. Por favor... ¡Piensa en los gatitos!
+     - ¿Por qué? Piensa en el símil que describen
+     - A una librería vas a /comprar/ un libro. Pagas tu dinero, te
+       llevas tu libro, y ese ejemplar ya no está ni estará más en su
+       colección.
+     - Una biblioteca te /presta/ un libro. El libro se mantiene
+       siempre como parte de su acervo, y lo pueden usar –idealmente–
+       todos los usuarios que lo requieran
+     - Es una confusión habitual, porque en inglés, /biblioteca/ se
+       dice _library_, y /librería/ se dice _book store_.
+   - Para la explicación... ¿Valía la pena manejar los tres niveles de
+     acercamiento que presenta el artículo? (revisa la nota que hice
+     a la entrega de José Nava)
+ - Calificación :: 10
+
+** Jaime Bautista y Daniel Zanabria
+ - Documentos :: [[./BautistaJaime-ZanabriaDaniel/Tearing apart printf.pdf][Tearing apart printf.pdf]], [[./BautistaJaime-ZanabriaDaniel/Proyecto 1_ Tearing apart printf().pdf][Proyecto 1_ Tearing apart printf().pdf]]
+ - Comentarios ::
+   - ¿Un resumen y un mapa conceptual del mismo artículo? Bueno, no
+     hacía falta hacer el trabajo dos veces... Yo no me quejo por
+     revisar más, pero a ustedes les tomó el doble de tiempo 😉
+   - Cada vez que dices /librería/ para referirte a una /biblioteca/,
+     Dios mata a un gatito. Por favor... ¡Piensa en los gatitos!
+     - Revisen el comentario al respecto en el envío anterior (Daniel
+       Cruz)
+   - ¡Excelente que verifiquen cómo funciona esto y presenten un
+     ejemplo de consulta de tabla de símbolos!
+     - Excelente que lo vinculen con temas que vimos en clase ☺
+ - Calificación :: 10
+
+** José Nava
+ - Documento :: [[./NavaJose/Proyecto1NavaJose.pdf][Proyecto1NavaJose.pdf]]
+ - Comentarios ::
+   - Me gusta que te saliste de los “grilletes” del artículo, de dar
+     tres niveles de explicación. No es que =printf()= funcione
+     diferente dependiendo de qué tan a fondo lo explicas — Y ya que
+     leíste completo, presentas la explicación de “1000 segundos”.
+ - Calificación :: 10
+
+* Another level of indirection
+  Nadie lo eligió
+
+* Anatomy of Linux system call in ARM64
+  Nadie lo eligió
+
+* A dive into the world of MS-DOS viruses
+
+** Adán Guevara
+ - Documento :: [[./GuevaraAdan/P1.pdf][DevelemosMitos.pdf]]
+ - Comentarios ::
+   - Tu trabajo es bueno, pero la forma en que armaste el PDF
+     dificulta la lectura
+     - Fotografías horizontales montadas en páginas verticales dejando
+       media página en blanco por cada una
+     - Dejas en manos del lector el averiguar por dónde comenzar la lectura
+     - Las fotos están un poco borrosas y hay información cortada
+   - Muestras algunos pasajes que llamaron tu atención en el texto,
+     pero no una línea discursiva (qué idea lleva a cual) fuera de la
+     primera página
+   - Pero sin duda, se nota que te gustó el artículo y que te picó la
+     curiosidad. ¡Y eso es muy bueno!
+ - Calificación :: 9
+
+** Luis Quintanar
+ - Documento :: [[./LuisQuintanar/DevelemosMitos.pdf][DevelemosMitos.pdf]]
+ - Comentarios ::
+ - Calificación :: 10
+
+** Rosario Ramsés
+ - Documento :: [[./RosarioRamses/1.pdf][1.pdf]]
+ - Comentarios ::
+   - Detalle gramatical: Cuando te refieres al decenio entre 1990 y
+     1999, puedes hablar de /la década de los noventa/. Algunas
+     personas simplifican y dicen /los noventa/; de forma coloquial sí
+     puedes decir /los noventas/, pero evita /los años noventas/ o /la
+     década de los noventas/. (→ [[https://www.rae.es/dpd/d%C3%A9cada][Diccionario Panhispánico de Dudas]])
+   - Le comenté a Tonatiuh Rodríguez también respecto a esta
+     herramienta /XMind/, me parece que genera resultados
+     estéticamente buenos, pero más difíciles de seguir. En este caso,
+     el generar flechas curvas que alternen su ubicación respecto al
+     nodo, y acomodar los nodos siguiendo recorridos /caprichosos/,
+     dificulta la lectura (es fácil perderse buscando la dirección)
+ - Calificación :: 10
