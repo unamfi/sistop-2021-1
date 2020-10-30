@@ -79,6 +79,6 @@ interm_mutex = threading.Semaphore(1)
 
 # Lanzamos los hilos. ¡A darle al vicio!
 threading.Thread(target=agente, args=[]).start()
-intermediarios = [threading.Thread(target=intermediario, args=[i]).start() for i in ingredientes]
 for i in ingredientes:
-    fumadores = [threading.Thread(target=fumador, args=[i]).start() for i in ingredientes]
+    intermediarios = [threading.Thread(target=intermediario, args=[i]).start()]
+    fumadores = [threading.Thread(target=fumador, args=[i]).start()]
