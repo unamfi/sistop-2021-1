@@ -1,8 +1,8 @@
-##Tarea 1
+#Tarea 1
 
-###Problema desarrollado: Los alumnos y el asesor
+##Problema desarrollado: Los alumnos y el asesor
 
-####Integrantes 
+###Integrantes 
 
 - Montiel Martinez Luis Javier
 - Rodríguez Dávalos Carolina
