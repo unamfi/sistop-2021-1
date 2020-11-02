@@ -1,8 +1,12 @@
 ##Tarea 1
+
 ###Problema desarrollado: Los alumnos y el asesor
+
 ####Integrantes 
+
 - Montiel Martinez Luis Javier
 - Rodríguez Dávalos Carolina
+
 ####Razonamiento
 Inicialmente se abordo el caso del profesor. 
 
