@@ -203,6 +203,22 @@ lo tiene, creo que podemos omitirlo 😉
 
 * A dive into the world of MS-DOS viruses
 
+** Adán Guevara
+ - Documento :: [[./GuevaraAdan/P1.pdf][DevelemosMitos.pdf]]
+ - Comentarios ::
+   - Tu trabajo es bueno, pero la forma en que armaste el PDF
+     dificulta la lectura
+     - Fotografías horizontales montadas en páginas verticales dejando
+       media página en blanco por cada una
+     - Dejas en manos del lector el averiguar por dónde comenzar la lectura
+     - Las fotos están un poco borrosas y hay información cortada
+   - Muestras algunos pasajes que llamaron tu atención en el texto,
+     pero no una línea discursiva (qué idea lleva a cual) fuera de la
+     primera página
+   - Pero sin duda, se nota que te gustó el artículo y que te picó la
+     curiosidad. ¡Y eso es muy bueno!
+ - Calificación :: 9
+
 ** Luis Quintanar
  - Documento :: [[./LuisQuintanar/DevelemosMitos.pdf][DevelemosMitos.pdf]]
  - Comentarios ::
