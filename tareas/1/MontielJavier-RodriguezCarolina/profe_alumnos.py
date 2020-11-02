@@ -15,7 +15,7 @@ def alumnos(id):
             profe_dormido.release()
         mutex_primer_alumno.release()
         num_preguntas= num_preguntas - 1
-    print('------->El alumno %d ya NO tiene dudas, ya se va' %id)
+    print('-------->El alumno %d ya NO tiene dudas, ya se va' %id)
         
 
 def profe():
