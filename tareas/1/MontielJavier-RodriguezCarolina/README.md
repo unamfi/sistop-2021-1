@@ -7,7 +7,7 @@
 - Montiel Martínez Luis Javier
 - Rodríguez Dávalos Carolina
 
-#### Lenguaje y entorno
+### Lenguaje y entorno
 El lenguaje que se utilizó para el desarrollo del problema fue Python 3.
 En una terminal ubicado en la ruta donde se encuentra el archivo, ejecutar el siguiente comando 
 ~~~
