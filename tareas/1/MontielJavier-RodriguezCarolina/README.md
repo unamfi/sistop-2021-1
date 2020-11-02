@@ -1,13 +1,13 @@
-#Tarea 1
+# Tarea 1
 
-##Problema desarrollado: Los alumnos y el asesor
+## Problema desarrollado: Los alumnos y el asesor
 
-###Integrantes 
+### Integrantes 
 
 - Montiel Martinez Luis Javier
 - Rodríguez Dávalos Carolina
 
-####Razonamiento
+#### Razonamiento
 Inicialmente se abordo el caso del profesor. 
 
 Tomando en cuenta el número de sillas en el cubículo del profesor realizamos una lista en la cual se encontrabas los id's de los alumnos que las ocupaban; en caso de no haber alumno alguno el hilo llamado 'profe' dormia.
