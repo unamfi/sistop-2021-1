@@ -1,0 +1,26 @@
+Guerrero Reyes David Alejandro
+Marcerlo Romero Adolfo
+
+- Problema: De gatos y ratones
+- Lenguaje: Python,ejecutable en sistemas Windows Mac OS y Linux/Ubuntu con Python3
+- Entorno: Visual Studio
+
+-Descripcion:
+Tengo k gatos (y desafortunadamente, l ratones) en su casa. Le sirvo la comida a mis gatos en m platos. 
+Gatos y ratones han llegado a un acuerdo para repartirse el tiempo y comida  
+Pero tienen que convencerme de que están haciendo su trabajo.
+Los gatos pueden comer de sus m platos de comida. 
+Los ratones pueden comer de esos mismos platos siempre y cuando no sean vistos. 
+Si un gato ve a un ratón comiendo, se lo debe comer (para mantener su reputación) 
+Los platos están puestos uno junto al otro 
+Sólo un animal puede comer de cada plato a la vez 
+Si un gato está comiendo y un ratón comienza a comer de otro plato, el gato lo ve (y se lo come). 
+Por acuerdo de caballeros, los gatos no se van a acercar a los platos mientras hay ratones comiendo. 
+Importante: ¡Hay que evitar la inanición!
+
+-Estrategia de sincronización
+Ocupamos los platos como semaforos ya que son el punto en común entre gatos y ratones, tambien para de esta forma asegurar que los animales no coman en el mismo plato.
+Como el problema no plantea un numero específico de gatos, platos y ratones, decidimos que el usuario sea el que ingrese estos datos.
+Cuando el ratón está comiendo buscamos excluir al gato para cumplir "el trato de caballeros", implementando un apagador.
+ - Dudas:
+ No logramos asignarle un plato al ratón "valiente" que quiso entrar cuando había un gato comiendo.
