@@ -1,0 +1,17 @@
+Nava Escobar Jose Alfredo
+Problema a resolver: "Los alumnos y el asesor"
+Lenguaje de programación Python version 3.8.5
+
+Para ejecutar el programa basta con escribir en la terminal (estando en el directorio donde esta el archivo claro):
+pythonn3 alumnos_asesor.py
+E ingresar el numero de sillas con las que cuenta el salón para esa ejecución 
+
+La estrategia a utilizar fue un mutex para manejar cuando el salón esta vacio y dormir al profesor,
+otro para cuando llegan los alumnos a ocupar las sillas.
+
+Notas: me confundí en como poder manejar los turnos y el numero de dudas de cada alumno, 
+el programa recibe a los alumnos en el salón y el profesor resuelve sus dudas uno a uno.
+
+Duda: Me plantee el manejar lo de los turnos con un torniquete pues teoricamente así lo entendí,
+al implementarlo me confundí mas y opte por no ponerlo ¿Era el camino correcto?
+
