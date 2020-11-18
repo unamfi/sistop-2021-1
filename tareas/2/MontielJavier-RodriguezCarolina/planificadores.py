@@ -1,3 +1,34 @@
+from timeit import default_timer
+ESTADO_LISTO = 1
+ESTADO_EN_EJECUCION = 0
+ESTADO_EN_BLOQUEO = 1
+DURACION_QUANTUM = 0.001
+CPU_CONCEDIDO = 1
+CPU_NEGADO = 0
+
+class Tiempo:
+    def __init__(self, procesos):
+        self.procesos = procesos
+        self.procesos.sorted(self.procesos, key = lambda x : x.quantum_inicio)
+    
+class Proceso:
+    def __init__(self, quantum_inicio, quantum_duracion, nombre_proceso):
+        self.estado = ESTADO_LISTO
+        self.quantum_duracion = quantum_duracion * DURACION_QUANTUM
+        self.quantum_inicio = quantum_inicio * DURACION_QUANTUM
+        self.nombre_proceso = nombre_proceso
+
+    def set_tipo_aviso(self, estado):
+        self.estado = estado
+    
+    def solicitar_cpu():
+        if planificador.respuesta() == CPU_CONCEDIDO:
+
+    
+    # def get_tipo_aviso(self):
+    
+
+
 """
 ------------->Responsabilidades
 ===>Tiempo
