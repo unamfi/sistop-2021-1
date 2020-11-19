@@ -1,0 +1,14 @@
+Sistemas Operativos 2021-1
+Tarea 2
+Rene Vazquez Peñaloza 
+Adan Yareth Guevara Mendoza 
+
+Al principio de cada ronda se definen los procesos en una lista y se imprimen, posteriormente copiamos esa lista en otras 3 para los siguientes mécanismos de planificación.
+Generamos la tabla del FCPS y hacemos los cálculos para obtener los promedios de Tiempo, Espera y Penalización.
+Posteriormente se presenta el esquema visual de cómo  se ejecutaría el FCPS.
+De igual manera, procedemos con el esquema visual del Round Robin 1 y sus réspectivos cálculos del promedio de T, E y P.
+Por último, se imprime el esquema visual del Round Robin 4 con sus cálculos de T, E y P.
+
+Todo esto se hace por 5 rondas,
+
+El programa se desarrollo en python se ejecuto en la version 3.8.2
