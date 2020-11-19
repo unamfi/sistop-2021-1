@@ -4,6 +4,7 @@ CPU_CONCEDIDO = 1
 CPU_NEGADO = 0
 ESTADO_LISTO = 1
 ESTADO_FINALIZADO = 0
+ESTADO_EJECUCION = 2
 
 class Tiempo:
     def __init__(self, procesos):
@@ -15,12 +16,11 @@ class Tiempo:
         tiempo_cero = default_timer()
         tiempo_actual = 0
         
-        while tiempo_actual < :
+        while len(self.procesos) > 0 :
             tiempo_actual = default_timer()
             tiempo_actual -= tiempo_cero
-            tiempo_actual = round(tiempo_actual,0)
-
-        print(tiempo_actual)
+            if tiempo_actual >= procesos[0].quantum_inicio and procesos[0] == ESTADO_LISTO:
+                procesos[0].solicitar_cpu()
 
 class Proceso:
     def __init__(self, quantum_inicio, quantum_duracion, nombre_proceso):
@@ -32,7 +32,7 @@ class Proceso:
         self.tiempo_espera = 0
         self.proporcion_penalizacion = 0
 
-    def set_tipo_aviso(self, estado):
+    def set_estado(self, estado):
         self.estado = estado
     
     def solicitar_cpu(self):
@@ -40,6 +40,8 @@ class Proceso:
         tiempo_anterior = 0
         tiempo_en_ejecucion = 0
         tiempo_bloqueado = 0
+
+        self.set_estado(ESTADO_EJECUCION)
 
         print('inicia el ciclo...')
 
@@ -56,7 +58,7 @@ class Proceso:
             
             tiempo_anterior = tiempo_actual
 
-        self.set_tipo_aviso(ESTADO_FINALIZADO)
+        self.set_estado(ESTADO_FINALIZADO)
 
 class Planificador:
     def __init__(self,procesos):
