@@ -10,21 +10,7 @@ class Tiempo:
     def __init__(self, procesos):
         self.procesos = procesos
         self.procesos = sorted(self.procesos, key = lambda x : x.quantum_inicio,reverse=False)
-        procesos = self.procesos
-
-    def corre_tiempo(self):
-        tiempo_cero = default_timer()
-        tiempo_actual = 0
-        siguiente_ejecucion = 0
-        
-        while len(self.procesos) > 0 :
-            tiempo_actual = default_timer()
-            tiempo_actual -= tiempo_cero
-            if tiempo_actual >= procesos[siguiente_ejecucion].quantum_inicio and procesos[siguiente_ejecucion].estado == ESTADO_LISTO:
-                procesos[siguiente_ejecucion].solicitar_cpu()
-                print("Entre al IF....")
-                siguiente_ejecucion += 1
-        print("Sali del IF")        
+        procesos = self.procesos   
 
 class Proceso:
     def __init__(self, quantum_inicio, quantum_duracion, nombre_proceso):
@@ -81,40 +67,9 @@ class Planificador:
 
     def detener_proceso(self,nombre_proceso):
         self.proceso_actual = None
-
-    def FCFS(self):
-        procesos = self.procesos[:]
-        tiempo = Tiempo(procesos)
-        tiempo.corre_tiempo()
-        
-        while len(self.procesos) > 0:
-            indice = self.detector()
-            if indice >= 0:
-                print("hola")
-                self.procesos.pop(indice)
-                print("Hice pop")
-
-    
-    def detector(self):
-        indice = 0
-        for x in self.procesos:
-            if x.estado == ESTADO_FINALIZADO:
-                print("retorne: ",x.nombre_proceso)
-                return indice
-        indice += 1
-        print("No hay nada")
-        return -1
     
         
-procesos = [] #1,0
-B = Proceso(1,5,'B')
-procesos.append(B)
-A = Proceso(0,3,'A')
-procesos.append(A)
-C = Proceso(3,2,'C')
-procesos.append(C)
-planificador = Planificador(procesos)
-planificador.FCFS()
+procesos = [] 
 
         
 
