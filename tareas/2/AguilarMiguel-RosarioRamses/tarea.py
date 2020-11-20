@@ -6,6 +6,7 @@
 
 from random import randint
 import copy
+import os                                           #trate de pasar los resultados a un txt pero no supe como
 
 ITERACIONES = 4                                     #numero de cargas, 5
 PROCESOS = ["A","B","C","D","E"]                    #nombres de los procesos
