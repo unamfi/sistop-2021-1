@@ -15,12 +15,16 @@ class Tiempo:
     def corre_tiempo(self):
         tiempo_cero = default_timer()
         tiempo_actual = 0
+        siguiente_ejecucion = 0
         
         while len(self.procesos) > 0 :
             tiempo_actual = default_timer()
             tiempo_actual -= tiempo_cero
-            if tiempo_actual >= procesos[0].quantum_inicio and procesos[0] == ESTADO_LISTO:
-                procesos[0].solicitar_cpu()
+            if tiempo_actual >= procesos[siguiente_ejecucion].quantum_inicio and procesos[siguiente_ejecucion].estado == ESTADO_LISTO:
+                procesos[siguiente_ejecucion].solicitar_cpu()
+                print("Entre al IF....")
+                siguiente_ejecucion += 1
+        print("Sali del IF")        
 
 class Proceso:
     def __init__(self, quantum_inicio, quantum_duracion, nombre_proceso):
@@ -45,7 +49,6 @@ class Proceso:
 
         print('inicia el ciclo...')
 
-
         tiempo_anterior = default_timer()
         while tiempo_en_ejecucion < self.quantum_duracion:
 
@@ -58,6 +61,7 @@ class Proceso:
             
             tiempo_anterior = tiempo_actual
 
+        print("Finaliza WHILE_PROCESO")  
         self.set_estado(ESTADO_FINALIZADO)
 
 class Planificador:
@@ -83,6 +87,24 @@ class Planificador:
         tiempo = Tiempo(procesos)
         tiempo.corre_tiempo()
         
+        while len(self.procesos) > 0:
+            indice = self.detector()
+            if indice >= 0:
+                print("hola")
+                self.procesos.pop(indice)
+                print("Hice pop")
+
+    
+    def detector(self):
+        indice = 0
+        for x in self.procesos:
+            if x.estado == ESTADO_FINALIZADO:
+                print("retorne: ",x.nombre_proceso)
+                return indice
+        indice += 1
+        print("No hay nada")
+        return -1
+    
         
 procesos = [] #1,0
 B = Proceso(1,5,'B')
