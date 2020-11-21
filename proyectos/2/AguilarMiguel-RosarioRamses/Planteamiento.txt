@@ -1,0 +1,8 @@
+El caso de la vida real que escogimos fue el de un hospital.
+
+Llegan n numero de pacientes normales, y m de pacientes de urgencia.
+Hay i camas de urgencia y j camas normales.
+
+Los pacientes de urgencia pueden usar las camas normales en caso de que se terminen las otras,
+pero los pacientes normales no pueden utilizar las de urgencia.
+La inanicion en este caso se presentaria que un tipo de paciente se quede sin cama.
