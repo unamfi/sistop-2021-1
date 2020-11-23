@@ -1,0 +1,17 @@
+Plamteamiento de problema: El juego del payaso y los niños
+
+Payaso
+1. Elegir un objeto de tres posibles opciones *
+2. Elegir las cordenandas donde colocara el objeto *
+3. Indicara las coordenadas a los niños * 
+4. Elige la distribución de los diferentes objetos en el tablero a jugar por niños
+
+Niños
+1. Tienen acceso al tablero dadas las coordenadas
+2. Solo pueden jugar hasta 3 rondas
+3. Quien sume más puntos gana
+
+Tablero
+1. Definido por el payaso
+2. Suma puntos y muestra que niño gana
+3. Mostrarse en consola
