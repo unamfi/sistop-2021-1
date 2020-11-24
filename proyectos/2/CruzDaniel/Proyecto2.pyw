@@ -40,7 +40,7 @@ def hostess2():
 	while True:
 		despertar_hostess2.acquire()
 		print("Bienvenidos, esta es su mesa y esta es la carta")
-		#mutex5.release()
+		mutex5.release()
 		mutex.release()
 		
 
@@ -77,8 +77,11 @@ def cliente(id):
 	tomar_orden.release()
 	mutex3.acquire()
 	time.sleep(1)
-	print("Nos vamos")
+	print("Soy %d y nos vamos" %id)
 	mutex_mesas.release()
+	if (id == n-1):
+		print("Ya no hay mas clientes")
+		print("La Ratatouille cierra sus puertas ...")
 
 def acompañantes(i,id):
 	global barrera
@@ -87,23 +90,21 @@ def acompañantes(i,id):
 		lista=lista1.pop()
 		#Barrera orden para acompañantes
 		barrera= threading.Barrier(lista)
-		mutex5.release()
+		#mutex5.release()
 	mutex_acompañantes.acquire()
 	time.sleep(random.random())
 	barrera.wait()
 	mutex2.release()
 
-
-
-
-
-	
 threading.Thread(target=mesero).start()
 threading.Thread(target=chef).start()
 threading.Thread(target=hostess).start()
 threading.Thread(target=hostess2).start()
 
-for cliente_id in range(7):
+print("¿Cuantos cientes (principales) entren a La Ratatouille?")
+n=int(input())
+
+for cliente_id in range(n):
     threading.Thread(target=cliente, args=[cliente_id]).start()
 
 '''from tkinter import *
