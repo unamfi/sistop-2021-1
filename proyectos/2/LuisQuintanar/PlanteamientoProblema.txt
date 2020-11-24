@@ -1,0 +1,12 @@
+**Identificación y descripción del problema:
+    Se planeó simular un restaurante, al cual llega demasiada clientela,
+    y los meseros tienen que "ingeniarselas" para atender a cada uno de ellos.
+    ¿Qué buscamos controlar?
+	Necesitamos asignar lugares a los clientes según vayan llegando y
+	tomar las ordenes de éstos
+    ¿Dónde pueden verser las consecuencias nocivas de la concurrencia?
+	Si han visitado un restaurante con mucha afluencia se darán cuenta que
+	no es una tarea fácil para los meseros. Los meseros no únicamente 		
+	atienden a una sola persona, sino que a varias, además las personas que 
+	llegan deben deben ser auxiliadas inmediatamente para evitar que se 
+	marchen si es que no querían hacerlo
