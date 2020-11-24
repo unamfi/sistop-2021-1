@@ -1,0 +1,262 @@
+#+title: Revisión de la tarea #2
+#+options: toc:nil num:nil
+
+* Criterios de calificación
+
+- Toda entrega que muestre trabajo y se acerque al planteamiento,
+  aunque no funcione, tiene asegurada una calificación mínima de 6
+- Si replica exitosamente el primer ejemplo (sólo tabla de
+  resultados), 7.5
+- Si presenta el esquema visual, 9
+- Si desarrollan un algoritmo de colas múltiples (retroalimentación
+  multinivel/FB, ronda egoísta/SRR), 9
+- Si presenta el esquema visual y además desarrollan un algoritmo de
+  colas múltiples, 10
+
+* Revisión
+
+** Miguel Aguilar y Ramsés Rosario
+- Documentación :: /No entregada/
+- Archivos :: [[./AguilarMiguel-RosarioRamses/tarea.py][tarea.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Hay un importante principio de programación al que es común
+    referirse por sus siglas — /DRY/ (/Don't Repeat Yourself/, ¡no te
+    repitas!).
+    - Su código repite textualmente muchos fragmentos. Desde lo más
+      obvio:
+      #+begin_src python
+        print("\n--------- PRIMERA CARGA ---------\n")
+	for i in range(0,ITERACIONES):
+	    cargas_al.append(carga(PROCESOS[i]))
+	    print(cargas_al[i][2] + ": " + str(cargas_al[i][0]) + ", t = " + str(cargas_al[i][1]),end='')
+	    print()
+
+	cargas_al.sort()
+	fifo(cargas_al)
+	roundrobin(cargas_al,1)
+	roundrobin(cargas_al,4)
+	spn(cargas_al)
+	cargas_al.clear()
+      #+end_src
+      Esta sección se repite textualmente cinco veces, variando
+      únicamente la cadena que se imprime. ¿Por qué no mejor repetirla
+      en un =for iteracion in range(5):=?
+    - Hasta lo que requeriría un /poco/ más de cuidado para /peinar/:
+      La implementación de cada uno de los algoritmos incluye el
+      cálculo del análisis numérico y la impresión de la secuencia
+      implementada. Si se dieran cuenta de haber cometido un error en
+      el cálculo de =P, T= y =E=, o si quieres imprimir sin separar
+      entre cada /tick/ por una barra, tienes que repetir el cambio en
+      cuantos puntos lo hayas hecho (o arriesgarse a código inconsistente
+    - Como regla general, siempre que se comiencen a repetir, así sea
+      una sóla vez, piensa si vale la pena separar lo que estás
+      escribiendo en una función aparte.
+- Calificación :: 9
+
+** Diego Armenta
+- Documentación :: /No entregada/
+- Archivos :: [[./ArmentaDiego/comparacion.py][comparacion.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - El programa tal como fue entregado no era funcional. ¿La
+    corrección? Afortunadamente, muy sencilla: En tus asignaciones a
+    los arreglos =rafagas= y =espera=, equivocaste la notación, y los
+    indicaste como funciones (dando el subíndice entre paréntesis) en
+    vez de arreglos (debe darse el subíndice entre corchetes):
+    #+begin_src diff
+      --- a/tareas/2/ArmentaDiego/comparacion.py
+      +++ b/tareas/2/ArmentaDiego/comparacion.py
+      @@ -52,8 +52,8 @@ def RR(q):
+	  while i < k:
+	      if (tim[i]>q):
+		  tTot += q
+		  [-esperas(proc[i]).append(q)-]
+      [-            rafagas(proc[i])+=q-]{+esperas[proc[i]].append(q)+}
+      {+            rafagas[proc[i]]+=q+}
+		  proc.append(proc[i])
+		  tim.append(tim[i]-q)
+		  proc.pop(i)
+      @@ -63,8 +63,8 @@ def RR(q):
+	      else:
+		  tTot += tim[i]
+
+		  [-esperas(proc[i]).append(tim[i])-]
+      [-            rafagas(proc[i])+=tim[i]-]{+esperas[proc[i]].append(tim[i])+}
+      {+            rafagas[proc[i]]+=tim[i]+}
+		  proc.pop(i)
+		  tim.pop(i)
+    #+end_src
+  - Tu implementación de RR, que no incluyes al imprimir, es
+    correcta. Te faltó /únicamente/ imprimirla y hacer su evaluación
+    numérica, pero hasta donde alcanzo a ver, tu lógica fue correcta y válida.
+  - Faltó que generaras las cargas aleatoriamente ☹ Soy muy flojo, no
+    me gusta estárselas dando generadas a mano...
+    - Además, obligas a que todos los procesos lleguen en =t=0=
+    - Y si le pides entrada al humano...tiendo a darle configuraciones
+      buscando /trucar/ tu lógica, por ejemplo, cualquier caso donde
+      $T_A$ sea el menor de todos: La lógica de tu /Shortest Job
+      First/ (que en clase vimos bajo el nombre /Shortest Process
+      Next/) invariablemente despacha primero a $A$, aunque el
+      ordenamiento interno de =B..E= es correcto.
+- Calificación :: 7.5
+
+** Jonathan Calzada
+- Documentación :: [[./CalzadaMartinez/README.md][README.md]]
+- Archivos :: [[./CalzadaMartinez/procesos_CalzadaMartinez.py][procesos_CalzadaMartinez.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✓
+- Esquema visual :: ✗
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Faltó implementar =SPN=, que es tan parecido a =FCFS= que es una
+    lástima ☹
+    - Falta también =RR=, pero ese requiere un poquito jugarle un
+      poquito más a la lógica... También es una lástima, pero es más
+      comprensible.
+- Calificación :: 6.5
+
+** Daniel Cruz
+- Documentación :: [[./CruzDaniel/Documentacion.md][Documentacion.md]]
+- Archivos :: [[./CruzDaniel/Tarea2.py][Tarea2.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✗
+- Esquema visual :: ✗
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - El programa presenta muchos errores, no puede ejecutarse ☹
+  - Desde fuentes, sólo contempla la implementación de FIFO, y éste no
+    desarrolla ni la tabla numérica ni el esquema visual
+- Calificación :: 6
+
+** David Guerrero y Adolfo Marcelo
+- Documentación :: [[./GerreroDavid-MarceloAdolfo/Doc_Tarea2][Doc_Tarea2]]
+- Archivos :: [[./GerreroDavid-MarceloAdolfo/Tarea2Planificadores.py][Tarea2Planificadores.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Hay un importante principio de programación al que es común
+    referirse por sus siglas — /DRY/ (/Don't Repeat Yourself/, ¡no te
+    repitas!).
+    - Su código repite textualmente muchos fragmentos. Desde lo más
+      obvio, en las tres funciones de =Algoritmo_=
+      #+begin_src python
+	Penal=0.0
+	Espera=0.0
+	Respuesta=0.0
+	for i in range (0,nCargas):
+	    for j in range(0,nCargas):
+		if c[i][2]==r[j][2]:
+		    Respuesta=Respuesta+listaP[i][1]+r[j][3]
+		    Espera=Espera+r[j][3]
+		    Penal=Penal+(listaP[i][1]+r[j][3])/listaP[i][1]
+	Espera=Espera/nCargas
+	Respuesta=Respuesta/nCargas
+	Penal=Penal/nCargas
+
+	print("\nTiempo de respuesta=%f \nTiempo de espera =%f \nTiempo de penalización=%f"%(Respuesta,Espera,Penal))#imprime los valores RR
+	print("----------------------")
+      #+end_src
+      ...Sería recomendable sacar esta sección repetida, y tener algo
+      por el estilo una =analiza(nCargas)= que llamaran desde los tres
+      algoritmos.
+    - Como regla general, siempre que se comiencen a repetir, así sea
+      una sóla vez, piensen si vale la pena separar lo que están
+      escribiendo en una función aparte.
+- Calificación :: 9
+
+** Adán Guevara y René Vázquez
+- Documentación :: [[./GuevaraAdan-VazquezRene/Documentacion.txt][Documentacion.txt]]
+- Archivos :: [[./GuevaraAdan-VazquezRene/Tarea2.py][Tarea2.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - ¡Faltó incluir SPN! Y... Es tan parecida a la implementación de
+    FIFO (sólo una verificación más) que... ☹
+- Calificación :: 8.5
+
+** Javier Montiel y Carolina Rodríguez
+- Documentación :: /No entregada/
+- Archivos :: [[./MontielJavier-RodriguezCarolina/planificadores.py][planificadores.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✗
+- Esquema visual :: ✗
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - La estructura del programa está limpia, bonita. El programa está
+    documentado siguiendo un estilo muy claro y completo. ¡Excelente
+    por ese lado!
+  - Pero desafortunadamente no implementa lo que tenían que hacer ☹ El
+    programa simula el lanzamiento de tres procesos... Y se queda para
+    siempre dándole vueltas al =while True= de =Tiempo#corre_tiempo()=
+    ☹
+  - Supongo que iban en el camino correcto de la implementación, pues
+    en la clase =Planificador= mencionan que ésta debería implementar
+    los algoritmos de planificación... Pero no llegaron.
+- Calificación :: 6.5
+
+** José Nava
+- Documentación :: [[./NavaJose/README.md][README.md]]
+- Archivos :: [[./NavaJose/comparaPlani.py][comparaPlani.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - El estilo de comentarios que usas, poner el comentario de cada
+    línea al final de la misma, es difícil de leer y te lleva a “tirar
+    corto”, a /narrar/ tu programa línea por línea (cuando muchos de
+    los comentarios deberian ser a nivel bloque).
+    - Te recomiendo fuertemente cambiar el estilo. En vez de:
+      #+begin_src python
+	a = a + 1 #Incrementamos a en 1
+      #+end_src
+      emplear el más habitual:
+      #+begin_src python
+	# Incrementamos a en 1
+	a = a + 1
+      #+end_src
+    - Además, te darás cuenta del problema en lo que te digo: Si vas
+      línea por línea, documentas cosas innecesarias, como en mi
+      ejemplo, o como en tu código:
+      #+begin_src python
+	    tA = 'A'*listaP[0][2]#Guardamos el numero de A's equivalente al tiempo que necesita el proceso A
+	    tB = 'B'*listaP[1][2]#Lo mismo para B
+	    tC = 'C'*listaP[2][2]#Tambien para C
+	    tD = 'D'*listaP[3][2]#Y para D
+	    tE = 'E'*listaP[4][2]#Ya que estamos por ahí lo hacemos para E
+      #+end_src
+      Tanto comentario, en vez de ayudar a la lectura, la estorba. Y
+      te genera mucha pérdida de tiempo al escribir lo mismo en
+      Python y en español.
+- Calificación :: 9
+
+** Francine Ochoa
+- Documentación :: [[./OchoaFrancine/Tarea 2.pdf][Tarea 2.pdf]]
+- Archivos :: [[./OchoaFrancine/tarea2.py][tarea2.py]]
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - ¡Muy buena implementación!
+- Calificación :: 9
