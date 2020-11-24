@@ -35,10 +35,11 @@ public class Clientes implements Runnable
 
   // Metodo run (Nos permite indicar que hacen los clientes (hilos) una vez creados)
   public void run(){
-    try {
+    try 
+    {
       semaforo.acquire(); // El cliente (Hilo) va con una cajera, si es que esta desocupada
       this.cajeras.Comprar(this.idCliente,this.carroCompra); // La cajera empieza a comprar 
-      } catch (InterruptedException E) {}
+    } catch (InterruptedException E) {}
     semaforo.release(); // Se notifica que acabo de comprar y la Cajera esta libre
   }
 

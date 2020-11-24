@@ -57,7 +57,7 @@ public class Main
       
 	}
 
-	// Metodo que cuenta con el ExecutorService que es el encargado de controlar el semaforo
+	// Metodo que cuenta con el ExecutorService (Barrera) que es el encargado de controlar el semaforo
 	// que siguen los hilos (clientes) para realizar sus tareas (pasar con las cajeras)
 	public void inicio(int numClientes)
 	{
@@ -67,7 +67,7 @@ public class Main
     	// Se forman los clientes y esperan su turno segun las cajeras se desocupan
     	for (int i = 1; i <= numClientes; i++) 
       		ejecutor.execute(new Clientes(i, cajeras));
-   		ejecutor.shutdown(); // Una vez sin clientes, se apaga el semaforo
+   		ejecutor.shutdown(); // Una vez sin clientes, se apaga la barrera
     	while (!ejecutor.isTerminated()); // Todo esto se realiza mientras el executor no haya termindado
 
     	System.out.println("\n >>> Tiempo Transcurrido Total: " + (System.currentTimeMillis() - initialTime) / 1000 + " seg <<<");
