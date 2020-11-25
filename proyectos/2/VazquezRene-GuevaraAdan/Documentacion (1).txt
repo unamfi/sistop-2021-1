@@ -1,0 +1,24 @@
+Adán Yareth Guevara Mendoza
+Rene Vazquez Peñaloza 
+Problema: Saturacion y Consulta de Usuarios. 
+
+Actualmente, los registros y consultas de cualquier paginas en ocasiones son tediosos, ya que se saturan dichas 
+acciones por diversas situaciones.
+
+Para esta situacion se implementa de forma muy basica una simulación a la solución de la saturacion de guardado y consulta de un servidor,
+considerando lo siguiente: 
+
+1. Aseguramos que no se llegué al límite de saturación poniendo ese límite. 
+
+Por ejemplo, esto quiere decir que si se encuentran 6 usuarios en el portal, 
+no pueden haber 3 usuarios consultando el portal y 3 guardando la solicitud para evitar choques.
+
+En consecuencia, si un usuario se halla sin hacer nada en el portal,
+y hay 3 usuarios consultando la pagina y 2 intentando guardar, no puede intentar guardar su solicitud. 
+
+2. No puede haber más de 2 usuarios realizando la misma acción. 
+
+Si no se cumple alguna de las condiciones anteriores el usuario/s 
+deben de esperar hasta que se den las condiciones óptimas para que sigan navegando.
+
+Para parar el programa es deteniendolo (con ctrl+alt+M en VSC)
