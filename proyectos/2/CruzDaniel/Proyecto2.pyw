@@ -8,7 +8,6 @@ import time
 def funcion():
 	#Destruimos la ventana anterior
 	root.destroy()
-	
 	#Creacion y configuracion de la segunda ventana
 	raiz=Tk()
 	raiz.title("La Ratatouille")
@@ -16,8 +15,10 @@ def funcion():
 	raiz.geometry("1024x388")
 	raiz.config(bg="black")
 	
-	raiz.iconbitmap("rata.ico")
-	imagen1 = PhotoImage(file="Ratatouille.png")
+	#Poner como comentario para poder ejecutarlo en sistemas Linux/Ubuntu
+	raiz.iconbitmap("./imagenes/rata.ico")
+	
+	imagen1 = PhotoImage(file="./imagenes/Ratatouille.png")
 	fondo = Label(raiz,image=imagen1).place(x=0,y=0)
 
 	#Declaracion de variables para las entradas dadas por el usuario
@@ -192,10 +193,12 @@ root.resizable(False, False)
 root.geometry("702x336")
 root.config(bg="beige")
 
-imagen = PhotoImage(file="fondo.png")
+imagen = PhotoImage(file="./imagenes/fondo.png")
 label = Label(image=imagen)
 label.pack()
-root.iconbitmap("rata.ico")
+
+#Poner como comentario para poder ejecutarlo en sistemas Linux/Ubuntu
+root.iconbitmap("./imagenes/rata.ico")
 
 Label(root,text="Bienvenido",fg="black",font=("Times New Roman",22)).place(x=50,y=130)
 
