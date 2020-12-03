@@ -57,6 +57,59 @@
 |------------------------+-----------+--------+----------|
 #+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
 
+* Jonathan Calzada
+- Situación implementada :: Centro distribuidor de paquetes
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./CalzadaJonathan/README.md][README.md]], [[./CalzadaJonathan/Centro_distribución_paquetes_CalzadaMartinez.pdf][Centro_distribución_paquetes_CalzadaMartinez.pdf]]
+- Archivos :: [[./CalzadaJonathan/proy02_CalzadaMartinez.py][proy02_CalzadaMartinez.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Señalización (=camioneta=) entre el centro de logística y las
+    camionetas de reparto
+  - Mutex (=mutex=) protegiendo de modificaciones la sección crítica
+- Observaciones ::
+  - No entregaste tu proyecto siguiendo los estándares de nombre que
+    acordamos (los archivos estaban en =proyectos/2=, no en tu
+    subdirectorio =proyectos/2/CalzadaJonathan=).
+  - ¡Tu mutex en =paquetes()= es muy grande! Recuerda que debes
+    mantener los mutexes tan cortos como sea posible; , para evitar
+    que se reduzca el rendimiento de la sección paralela, y para
+    evitar peligro de bloqueos (p.ej. si dentro del mutex haces un
+    =acquire()=)
+  - ¡No te juzgo por usar Windows! A fin de cuentas, casi todos
+    ustedes lo usan... Y como les he comentado, es un sistema
+    completamente válido. Pero sí, sí te juzgo — ¡es parte de mi
+    trabajo! (espero hacerlo de forma justa y objetiva).
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.09 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
 * Daniel Cruz
 - Situación implementada :: Asignación de mesa y atención a clientes
   de un restaurante
