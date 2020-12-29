@@ -1,0 +1,791 @@
+#+title: Proyecto 2 • Calificaciones y comentarios
+#+options: num:nil toc:nil
+
+* Diego Armenta
+- Situación implementada :: Venta y devolución de boletos para una
+  sala de cine
+- Interfaz :: Vuelca a línea de comando las acciones efectuadas por
+  cada hilo y, periódicamente, el mapa de asientos resultante
+- Documentación :: [[./ArmentaDiego/Documentacion.txt][Documentacion.txt]], [[./ArmentaDiego/README.md][README.md]]
+- Archivos :: [[./ArmentaDiego/Proyecto2.py][Proyecto2.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Generación de un pool de hilos ejecutores con manejo de futuros
+  - Mutex entre los diferentes hilos para la sección crítica
+    (modificar las listas de asientos ocupados y libres)
+- Observaciones ::
+  - ¡Me gusta el uso de =ThreadPoolExecutor=!
+    - No lo estás aprovechando por completo, me parece: Tus
+      resultantes =task1= a =task6= son /futuros/, esto es, son hilos
+      que son lanzados y que /en algún momento/ deben entregar sus
+      resultados.
+    - Creo que resultaría más /limpio/ esperar a los seis futuros
+      antes de imprimir el mapa. Esto es, yo agregaría antes de la
+      llamada a =mapa()=:
+      #+begin_src python
+	for i in (task1,task2,task3,task4,task5,task6):
+	    i.result()
+      #+end_src
+    - Con esa modificación, aseguras que el =mapa()= reciba la
+      representación ya estable de las seis modificaciones.
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.33 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     1.84 |
+| Documentación expresa  |       7.5 |        |     0.50 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.34 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Jonathan Calzada
+- Situación implementada :: Centro distribuidor de paquetes
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./CalzadaJonathan/README.md][README.md]], [[./CalzadaJonathan/Centro_distribución_paquetes_CalzadaMartinez.pdf][Centro_distribución_paquetes_CalzadaMartinez.pdf]]
+- Archivos :: [[./CalzadaJonathan/proy02_CalzadaMartinez.py][proy02_CalzadaMartinez.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Señalización (=camioneta=) entre el centro de logística y las
+    camionetas de reparto
+  - Mutex (=mutex=) protegiendo de modificaciones la sección crítica
+- Observaciones ::
+  - No entregaste tu proyecto siguiendo los estándares de nombre que
+    acordamos (los archivos estaban en =proyectos/2=, no en tu
+    subdirectorio =proyectos/2/CalzadaJonathan=).
+  - ¡Tu mutex en =paquetes()= es muy grande! Recuerda que debes
+    mantener los mutexes tan cortos como sea posible; , para evitar
+    que se reduzca el rendimiento de la sección paralela, y para
+    evitar peligro de bloqueos (p.ej. si dentro del mutex haces un
+    =acquire()=)
+  - ¡No te juzgo por usar Windows! A fin de cuentas, casi todos
+    ustedes lo usan... Y como les he comentado, es un sistema
+    completamente válido. Pero sí, sí te juzgo — ¡es parte de mi
+    trabajo! (espero hacerlo de forma justa y objetiva).
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.09 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Daniel Cruz
+- Situación implementada :: Asignación de mesa y atención a clientes
+  de un restaurante
+- Interfaz :: Entorno GUI =TkInter= para especificar los parámetros,
+  salida por terminal.
+- Documentación :: [[./CruzDaniel/Documentacion.md][Documentacion.md]], [[./CruzDaniel/imagenes/Ratatouille.png][Ratatouille.png]], [[./CruzDaniel/imagenes/captura1.png][captura1.png]], [[./CruzDaniel/imagenes/captura2.png][captura2.png]], [[./CruzDaniel/imagenes/captura3.png][captura3.png]], [[./CruzDaniel/imagenes/captura4.png][captura4.png]], [[./CruzDaniel/imagenes/fondo.png][fondo.png]], [[./CruzDaniel/imagenes/rata.ico][rata.ico]]
+- =.gitignore= :: [[./CruzDaniel/.gitignore][.gitignore]]
+- Archivos :: [[./CruzDaniel/Proyecto2.pyw][Proyecto2.pyw]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Señalización: Hay varios eventos que trasladan el "foco" de la
+    acción entre procesos
+  - Mutex: Cda cliente, al tener interacción con el mesero para hacer
+    su pedido.
+  - Barrera: El cliente espera a que todos sus caompañantes hayan
+    decidido antes de pedir.
+- Observaciones ::
+  - Desde la documentación: ¡Ojo con las visiones sexistas de las
+    ocupaciones! ¿Por qué cocinero y mesero, pero dos hostesses?
+  - Interfaz gráfica: Generas una pantalla GUI bonita que nos enmarca
+    la operación, pero en el momento de presentar la terminal (donde
+    el programa /realmente/ manda su salida), ésta excede del tamaño
+    de la ventana que generaste
+  - Se siente sin duda que intentaste hacer una interfaz interesante y
+    amigable, pero la interacción no indica más que lo más básico;
+    supongoq ue estarás de acuerdo en que considere a tu programa como
+    de línea de comando, enmarcado en un bonito marco GUI...
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.84 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |        10 |        |     0.67 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     9.36 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* David Guerrero y Adolfo Marcelo
+- Situación implementada :: Estacionamiento con varias entradas y salidas
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando y del estado del estacionamiento
+- Documentación :: [[./GerreroDavid-MarceloAdolfo/documentación.pdf][documentación.pdf]]
+- Archivos :: [[./GerreroDavid-MarceloAdolfo/CConsumidorMuestras.class][CConsumidorMuestras.class]], [[./GerreroDavid-MarceloAdolfo/CConsumidorMuestras.java][CConsumidorMuestras.java]], [[./GerreroDavid-MarceloAdolfo/Muestras.class][Muestras.class]], [[./GerreroDavid-MarceloAdolfo/Muestras.java][Muestras.java]], [[./GerreroDavid-MarceloAdolfo/ProductorConsumidorMuestras.class][ProductorConsumidorMuestras.class]], [[./GerreroDavid-MarceloAdolfo/ProductorConsumidorMuestras.java][ProductorConsumidorMuestras.java]], [[./GerreroDavid-MarceloAdolfo/ProductorMuestras.class][ProductorMuestras.class]], [[./GerreroDavid-MarceloAdolfo/ProductorMuestras.java][ProductorMuestras.java]]
+- Lenguaje de desarrollo :: Java
+- Uso de multitarea / sincronización ::
+  - Hilos para los diferentes actores (¿autos? ¿generador de autos? →
+    =CConsumidorMuestras=, =ProductorMuestras=)
+  - Mutexes usando el decorador =synchronized=, notificaciones
+    mediante =wait()= / =notifyAll()=
+- Observaciones ::
+  - Al hacer una entrega, envíen sus /archivos fuente/ (en este caso,
+    =*.java=), no sus /archivos objeto/ (o compilados,
+    =*.class=). Cuando yo los recompilo (=javac *.java=), el
+    directorio se /ensucia/:
+    #+begin_src text
+      $ javac *.java
+      $ git status
+      On branch master
+      Changes not staged for commit:
+	(use "git add <file>..." to update what will be committed)
+	(use "git restore <file>..." to discard changes in working directory)
+	      modified:   CConsumidorMuestras.class
+	      modified:   Muestras.class
+	      modified:   ProductorConsumidorMuestras.class
+	      modified:   ProductorMuestras.class
+    #+end_src
+  - No indican cuál es el archivo que debo ejecutar... Tengo que ir
+    por prueba y error, o buscar cuál de ellos define un =main()=.
+  - El nombre de las funciones y variables utilizadas
+    (=AlmacenaMuestra=, =DespachaMuestra=, =Muestras=, etc.) no
+    tienen relación con el espacio del problema que describen. El
+    problema modela correctamente al comportamiento que describen,
+    pero parece adaptado de algo completamente distinto
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |      1.5 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |      1.5 |
+| Documentación expresa  |       7.5 |        |     0.50 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.33 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |         5 |        |     0.33 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |      1.5 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |         5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     7.33 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Luis Quintanar
+- Situación implementada :: Asignación de lugares a la clientela de un restaurante
+- Interfaz :: Entorno GUI =TkInter= para especificar los parámetros y
+  despliegue del estado, bitácora de salida por terminal.
+- Documentación :: [[./LuisQuintanar/Planteamiento del problema.txt][Planteamiento del problema.txt]], [[./LuisQuintanar/PlanteamientoProblema.txt][PlanteamientoProblema.txt]], [[./LuisQuintanar/proyecto02.pdf][proyecto02.pdf]]
+- Archivos :: [[./LuisQuintanar/proyecto02.py][proyecto02.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Mutex protegiendo a la asignación de asiento del mesero a los
+    clientes (tanto en la lista de /esperando/ como en la lista de
+    /sentados/)
+  - Notificación del cliente al mesero para indicarle que llegó
+- Observaciones ::
+  - Me costó un poco comprender tu lógica, porque casi toda la
+    interacción ocurre dentro de la clase =Restaurante=. Cuando desde
+    ésta se lanzan a los meseros y clientes en =run()=, llamas a los
+    métodos de =Restaurante= llamados =Meseros()= y
+    =Clientes()=. Éstos, a su vez, instancian a las clases =Mesero= y
+    =Cliente= para su trabajo. Es completamente válido, pero hace
+    doler al cerebro 😉
+    - Las acciones relativas a la sincronización se realizan desde los
+      métodos =Meseros()= y =Clientes()=, no desde las clases qeu los
+      representan. Por limpieza conceptual, yo sugeriría trasladar
+      toda la lógica de señalización hacia adentro de las clases.
+    - También por limpieza conceptual: piensa en la composición de la
+      vida real: Tal vez los =Meseros()= forman parte del
+      =Restaurante=. Pero... ¿Y los =Clientes()=? ¿No deberían
+      lanzarse desde afuera, representando mejor la realidad?
+  - La interfaz usuario: Muy bien. Haces una buena división entre la
+    información "relevante" que se le muestra al usuario externo (las
+    dos listas en todo momento), y la información de
+    depuración/bitácora, que se imprime constantemente hacia la
+    terminal, permitiendo comprender lo que ocurre.
+  - Corriendo tu programa un par de veces (con parámetros 20-5-2-100,
+    no sé si haga mucha diferencia), caí en una probable condición de
+    carrera:
+    #+begin_src text
+      Clientes sentados: 8 -
+      Clientes esperando: 18 -
+		Tomando orden del cliente 8
+      Llego el cliente % 3
+      Llego el cliente % 4
+      Llego el cliente % 6
+      EL CLIENTE  8  YA NO TIENE MÁS QUE ORDENAR
+      ........ Cliente  8  comiendo
+      .........EL cliente  8  se marcha
+      Exception in thread Thread-7:
+      Traceback (most recent call last):
+	File "/usr/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+	  self.run()
+	File "/usr/lib/python3.8/threading.py", line 870, in run
+	  self._target(*self._args, **self._kwargs)
+	File "proyecto02.py", line 177, in Meseros
+	  self.mesero.toma_orden(self.clientes_sentados[0])
+      IndexError: list index out of range
+    #+end_src
+    - No me meto a depurar qué es lo que pasó, pero /me parece/ que
+      hubo un error de tipo /TOCTTOU/ (/Time Of Check To Time Of
+      Use/): Dos meseros vieron que había un cliente esperando; el
+      mesero /A/ atendió al cliente 8, que comió y se marchó, y cuando
+      el mesero /B/ intentó atenderlo, ya no había nadie ahí.
+    - Este problema se presenta con alta probabilidad (en mi
+      experiencia, >60% en un minuto de ejecución) en situaciones en
+      que hay más meseros que mesas.
+    - Como punto adicional que apoya a mi teoría, mira lo que ocurre
+      al inicio de la ejecución:
+      #+begin_src text
+	$ python3 proyecto02.py 
+	Llego el cliente % 3
+	Clientes sentados:
+	Clientes esperando: 3 -
+	Clientes sentados: 3 -
+	Clientes esperando: 
+	Mesero 4 atendiendo a  3
+		  Tomando orden del cliente 3
+	Mesero 8 atendiendo a  3
+	Mesero 5 atendiendo a  3
+	Mesero 1 atendiendo a  3
+	Mesero 7 atendiendo a  3
+	Mesero 8 atendiendo a  3
+	Mesero 5 atendiendo a  3
+	Mesero 8 atendiendo a  3
+	Mesero 2 atendiendo a  3
+	Mesero 0 atendiendo a  3
+      #+end_src
+      El cliente 3 debe estar muy satisfecho con el nivel de servicio
+      del restaurante... ¡O tal vez esté un poco atosigado!
+  - Hay algún otro punto a revisar en el manejo de listas: Lancé una
+    vez el programa con uno de los conjuntos de parámetros de tu
+    documentación (100-2-3-90), y volteé a hacer otra cosa. Volteé de
+    vuelta, y me encontré con que:
+    #+begin_src text
+      Clientes sentados: 46 -46 -74 -37 -93 -46 -74 -37 -46 -74 -37 -93 -23 -46 -74 -37 -93 -23 -
+      Clientes esperando: 46 -74 -37 -93 -23 -
+    #+end_src
+    ¡Debería mantenerse la invariante de que =clientes_sentados <
+    numero_asientos=! (y es fácil de implementar con un /multiplex/)
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       2. |
+| Cumplimiento           |        10 |        |     2.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |      1.5 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |      1.5 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |         5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.68 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Javier Montiel y Carolina Rodriguez
+- Situación implementada :: El juego del payaso y los niños
+- Interfaz :: No llegó a desarrollarse ☹
+- Documentación :: [[./MontielJavier-RodriguezCarolina/ideas.txt][ideas.txt]]
+- =.gitignore= :: [[./MontielJavier-RodriguezCarolina/.gitignore][.gitignore]]
+- Archivos :: [[./MontielJavier-RodriguezCarolina/main.py][main.py]], [[./MontielJavier-RodriguezCarolina/ninio.py][ninio.py]], [[./MontielJavier-RodriguezCarolina/payaso.py][payaso.py]], [[./MontielJavier-RodriguezCarolina/tablero.py][tablero.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización :: No llegó a desarrollarse ☹
+- Observaciones ::
+  - Los alumnos me notificaron que no tuvieron tiempo para hacer el
+    desarrollo. Les pedí que lo entregaran de todos modos, más vale
+    calificar buenas intenciones que no obtener calificación alguna...
+  - El planteamiento se ve interesante, y creo que podría
+    implementarse con relativa facilidad con lo que vimos. Lástima que
+    sólo podemos imaginarlo ☹
+    - ¡Desarróllenlo de todos modos! Estos ejercicios dan
+      calificación, sí, pero... su principal razón de ser es que
+      practiquen y vean en lo que se atoran, lo que funciona (o no)
+      como esperan.
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       1. |
+| Cumplimiento           |         5 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     0.67 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |         0 |        |     0.00 |
+| Interfaz usuario       |         0 |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     0.33 |
+| Documentación expresa  |         5 |        |     0.33 |
+| Entorno y dependencias |         0 |        |     0.00 |
+| Comentarios            |         0 |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.34 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |         0 |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     5.09 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Jose Nava
+- Situación implementada :: La tiendita
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./NavaJose/1.png][1.png]], [[./NavaJose/2.png][2.png]], [[./NavaJose/README.md][README.md]]
+- =.gitignore= :: [[./NavaJose/.gitignore][.gitignore]]
+- Archivos :: [[./NavaJose/tiendita.py][tiendita.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Multiplex para limitar la cantidad de clientes dentro de la
+    tiendita
+  - Señalización para que cada cliente notifique sus pedidos a la
+    tendera les vaya despachando y entregando sus productos
+  - El turno es manejado como un mutex
+- Observaciones ::
+  - Hay varias acciones que son tomadas por el actor
+    equivocado. Simplifica el modelado, sí, pero... ¡es tomarse
+    licencias muy creativas con la sincronización!
+    - El último cliente cierra la tienda
+    - El cliente habla a nombre de la tendera cuando ésta /debería
+      decirle/ =¡Hasta luego, vuelva pronto!=
+  - Falta proteger de accesos simultáneos a la variable global
+    =n=.
+    - Esto lleva a una condición de carrera en =tendera()=: si bien es
+      ingenioso cómo el último cliente le indica que es hora de cerrar
+      la tienda, a veces la tendera se queda esperando, ya con la
+      cortina de la tienda abajo, a que alguien le libere =pedidos= o
+      =turnos= ☹ ¿Qué opinará su familia de que no llegue a dormir?
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.68 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Mario Vasquez
+- Situación implementada :: Cajas express del supermercado
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./VasquezMario/README.md][README.md]], [[./VasquezMario/img/1.png][1.png]], [[./VasquezMario/img/2.png][2.png]], [[./VasquezMario/img/3.png][3.png]], [[./VasquezMario/img/4.png][4.png]], [[./VasquezMario/img/intento.png][intento.png]], [[./VasquezMario/img/mint.png][mint.png]]
+- =.gitignore= :: [[./VasquezMario/.gitignore][.gitignore]]
+- Archivos :: [[./VasquezMario/Codigo/Cajeras.java][Cajeras.java]], [[./VasquezMario/Codigo/Clientes.java][Clientes.java]], [[./VasquezMario/Codigo/Main.java][Main.java]]
+- Lenguaje de desarrollo :: Java
+- Uso de multitarea / sincronización ::
+  - Tres mutexes manejados entre los hilos cliente para asegurar
+    acceso exclusivo a cada cajera
+- Observaciones :: 
+  - ¡Ojo con las visiones sexistas de las ocupaciones! ¿Por qué puede
+    haber cajeras pero no cajeros?
+  - ¡Me encantó que caches excepciones con acciones acorde! Esto va
+    más allá de lo folklórico: es muy importante desarrollar esto como
+    parte de nuestra práctica habitual
+    #+begin_src java
+      private void esperarXsegundos(int segundos) {
+	try {
+	  Thread.sleep(segundos * 1000);
+	} catch (InterruptedException ex) {
+	  System.out.println("El cliente era un ladron y se fue sin pagar (Protocolo cerrar Changarro)");
+	  Thread.currentThread().interrupt();
+	}
+      }
+    #+end_src
+  - Cuando lanzo tu programa, el ventilador de mi computadora se va al
+    techo. Honestamente, no me queda claro el por qué: No veo ninguna
+    espera activa; manejas correctamente =Thread.sleep()= y
+    señalización con el semáforo :-/
+  - ¡Ojo! Tienes por lo menos este detalle en la indentación. Cosas
+    como esto hacen que la lectura del código resulte truculenta, y te
+    pueden llevar a errores importantes:
+    #+begin_src java
+      for (int i = 1; i <= numClientes; i++) 
+	      ejecutor.execute(new Clientes(i, cajeras));
+	      ejecutor.shutdown(); // Una vez sin clientes, se apaga la barrera
+      while (!ejecutor.isTerminated()); // Todo esto se realiza mientras el executor no haya termindado
+    #+end_src
+    El =for= incluye únicamente a la línea inmediatamente consecutiva,
+    =ejecutor.shutdown()= se ejecuta una única vez.
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       0. |
+| Cumplimiento           |           |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |      1.5 |
+| Estructura             |       7.5 |        |     0.75 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     6.68 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* René Vázquez y Adán Guevara
+- Situación implementada :: Saturación y consulta de usuarios
+- Interfaz :: Texto (mensajes a consola describen el avance del sistema)
+- Documentación :: [[./VazquezRene-GuevaraAdan/Documentacion (1).txt][Documentacion (1).txt]]
+- Archivos :: [[./VazquezRene-GuevaraAdan/proyecto2.py][proyecto2.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Dos multiplex con el número de usuarios totales para cada una de
+    las operaciones
+  - Dos mutex que no se usan (el código donde verificaban si es seguro
+    consultar o guardar está comentado)
+- Observaciones ::
+  - Lo que planteas en la documentación no cuadra con lo que presentas
+    - La situación más habitual después de haber inicializado es que
+      /haya/ la misma cantidad de usuarios realizando acciones
+      distintas — Dos consultando y dos guardando
+  - No documentas cómo lanzar el programa, qué requiere, qué debo ver
+    en pantalla, dependencias, tu nombre...
+  - Termina siendo únicamente un control de usuarios máximos con dos
+    multiplex.
+  - ... Pero [[https://github.com/unamfi/sistop-2020-2/blob/master/proyectos/2/calificaciones.org#ren%C3%A9-v%C3%A1zquez][eso ya lo sabías]] ☹ Este proyecto es básicamente el mismo
+    que el entregado el semestre anterior:
+    #+begin_src diff
+      $ diff -b -u ~/vcs/sistop-2020-2/proyectos/2/VazquezRene/proyecto2.py proyecto2.py 
+      --- /home/gwolf/vcs/sistop-2020-2/proyectos/2/VazquezRene/proyecto2.py	2020-04-30 12:29:42.478270217 -0500
+      +++ proyecto2.py	2020-11-30 10:33:45.908267789 -0600
+      @@ -1,4 +1,3 @@
+      -#!/usr/bin/python
+       # -*- coding: utf-8 -*-
+       # Sistemas Operativos 
+       # Rene Vazquez Peñaloza 
+      @@ -119,7 +118,7 @@
+			   numUsuariosGuardando -= 1
+			   #print(self)
+ 
+      -                elif nuevaAccion  == 0 and  sepuedeConsultar:
+      +                elif nuevaAccion  == 0 and  sepuedeGuardar:
+			   multiplexGuardar.acquire()
+			   AGuardar.add(self)
+			   self.accionActual = 0
+      @@ -154,12 +153,12 @@
+ 
+       def main():
+	   rene = Usuario("Rene")
+      -    bruno = Usuario("Bruno")
+      -    daniel = Usuario("Daniel")
+      -    diego = Usuario("Diego")
+      +    adan = Usuario("Adan")
+      +    miguel = Usuario("Miguel")
+      +    gabriel = Usuario("Gabriel")
+	   rafael = Usuario("Rafael")
+	   edith = Usuario("Edith")
+      -    cliente=[rene, bruno, daniel, diego, rafael, edith]
+      +    cliente=[rene, adan, miguel, gabriel, rafael, edith]
+	   print("*"*30)
+	   hilos = []
+	   hilos.append(threading.Thread(target=getStatus))
+      $ diff -b -u ~/vcs/sistop-2020-2/proyectos/2/VazquezRene/Documentacion.txt Documentacion\ \(1\).txt 
+      --- /home/gwolf/vcs/sistop-2020-2/proyectos/2/VazquezRene/Documentacion.txt	2020-04-22 11:35:34.005978574 -0500
+      +++ "Documentacion (1).txt"	2020-11-30 10:33:45.908267789 -0600
+      @@ -1,14 +1,14 @@
+      -
+      +Adán Yareth Guevara Mendoza
+       Rene Vazquez Peñaloza 
+       Problema: Saturacion y Consulta de Usuarios. 
+ 
+       Actualmente, los registros y consultas de cualquier paginas en ocasiones son tediosos, ya que se saturan dichas 
+       acciones por diversas situaciones.
+ 
+      -Para esta situacion se implementa de forma muy basica la saturacion de guardado y consulta de un servidor,
+      +Para esta situacion se implementa de forma muy basica una simulación a la solución de la saturacion de guardado y consulta de un servidor,
+       considerando lo siguiente: 
+ 
+      -1. No puede haber la misma cantidad de usuarios realizando acciones distintas. 
+      +1. Aseguramos que no se llegué al límite de saturación poniendo ese límite. 
+ 
+       Por ejemplo, esto quiere decir que si se encuentran 6 usuarios en el portal, 
+       no pueden haber 3 usuarios consultando el portal y 3 guardando la solicitud para evitar choques.
+      @@ -16,9 +16,9 @@
+       En consecuencia, si un usuario se halla sin hacer nada en el portal,
+       y hay 3 usuarios consultando la pagina y 2 intentando guardar, no puede intentar guardar su solicitud. 
+ 
+      -2. No puede haber más de 3 usuarios realizando la misma acción. 
+      +2. No puede haber más de 2 usuarios realizando la misma acción. 
+ 
+       Si no se cumple alguna de las condiciones anteriores el usuario/s 
+       deben de esperar hasta que se den las condiciones óptimas para que sigan navegando.
+ 
+      -
+      +Para parar el programa es deteniendolo (con ctrl+alt+M en VSC)
+      \ No newline at end of file
+    #+end_src
+  - Si el programa anterior es virtualmente idéntico al programa
+    actual, y si agregan a un participante en el equipo... no puedo
+    aceptar esta entrega.
+
+* Daniel Zanabria
+- Situación implementada :: Sala de urgencias de un hospital
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./ZanabriaDaniel/Proyecto 2_ Hilos y concurrencia.docx][Proyecto 2_ Hilos y concurrencia.docx]], [[./ZanabriaDaniel/Proyecto 2_ Hilos y concurrencia.pdf][Proyecto 2_ Hilos y concurrencia.pdf]]
+- Archivos :: [[./ZanabriaDaniel/urgencias.py][urgencias.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización :: Multiplex limitando a un
+  número máximo de hilos activos
+- Observaciones ::
+  - Tu variable =paciente= tiene uso tanto local como global. ¡Evita
+    eso, puede confundirte mucho!
+  - Respecto a la duda que planteas al final de la documentación —
+    ¿Por qué después de atender a diez hilos comienzan a "colarse"
+    pacientes con números grandes? Es porque tu hospital está más
+    saturado que los de la Secretaría de Salud. ¿Cómo generas a los
+    nuevos pacientes?
+    #+begin_src python
+      while True:
+	  paciente = paciente + 1
+	  threading.Thread(target=llegada_pacientes, args=[paciente, multiplex]).start()
+    #+end_src
+    Le hice una pequeña modificación:
+    #+begin_src python
+      while True:
+	  paciente = paciente + 1
+	  threading.Thread(target=llegada_pacientes, args=[paciente, multiplex]).start()
+	  num_pacientes = len(threading.enumerate()) - 1
+	  if num_pacientes % 100 == 0:
+	      print('¡Ya tenemos %d pacientes esperando!' % num_pacientes)
+    #+end_src
+    (¿por qué =-1=? Por el hilo controlador).
+
+    Los primeros pacientes se benefician de la cola vacía y reciben a
+    un médico cada uno, pero después de un rato:
+    #+begin_src text
+      Atendiendo al paciente 9 con nivel de urgencia 3
+      Pasen al paciente 10 a urgencias
+      Atendiendo al paciente 10 con nivel de urgencia MÁS ALTO: 4
+      ¡Ya tenemos 100 pacientes esperando!
+      ¡Ya tenemos 200 pacientes esperando!
+      ¡Ya tenemos 300 pacientes esperando!
+      ¡Ya tenemos 400 pacientes esperando!
+      ¡Ya tenemos 500 pacientes esperando!
+      ¡Ya tenemos 600 pacientes esperando!
+      ¡Ya tenemos 700 pacientes esperando!
+      ¡Ya tenemos 800 pacientes esperando!
+      ¡Ya tenemos 900 pacientes esperando!
+      ¡Ya tenemos 1000 pacientes esperando!
+      Libera al paciente 6
+      Atendiendo al paciente 1086 con nivel de urgencia 2
+      ¡Ya tenemos 1100 pacientes esperando!
+      ¡Ya tenemos 1200 pacientes esperando!
+    #+end_src
+    - ¿Solución? Modula el ritmo de llegada con un pequeño =sleep()=:
+      #+begin_src python
+	while True:
+	    paciente = paciente + 1
+	    threading.Thread(target=llegada_pacientes, args=[paciente, multiplex]).start()
+	    time.sleep(random.random())
+	    num_pacientes = len(threading.enumerate()) - 1
+	    print('Tenemos %d pacientes esperando' % num_pacientes)
+      #+end_src
+      Ya con eso, el comportamiento se mantiene dentro de límites
+      aceptables:
+      #+begin_src text
+	Tenemos 5 pacientes esperando
+	Atendiendo al paciente 50 con nivel de urgencia 1
+	Libera al paciente 49
+	Libera al paciente 47
+	Libera al paciente 46
+	Tenemos 3 pacientes esperando
+	Pasen al paciente 51 a urgencias
+	Atendiendo al paciente 51 con nivel de urgencia MÁS ALTO: 4
+	Libera al paciente 48
+	Libera al paciente 50
+	Tenemos 2 pacientes esperando
+	Pasen al paciente 52 a urgencias
+	Atendiendo al paciente 52 con nivel de urgencia MÁS ALTO: 4
+	Tenemos 3 pacientes esperando
+	Atendiendo al paciente 53 con nivel de urgencia 2
+	Libera al paciente 53
+	Tenemos 3 pacientes esperando
+	Atendiendo al paciente 54 con nivel de urgencia 3
+	Libera al paciente 45
+	Libera al paciente 54
+	Libera al paciente 51
+	Libera al paciente 52
+	Tenemos 0 pacientes esperando
+	Atendiendo al paciente 55 con nivel de urgencia 2
+	Libera al paciente 55
+      #+end_src
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       1. |
+| Cumplimiento           |         5 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     1.67 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |      7.5 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Erik Zepeda
+- Situación implementada :: Organizar las actividades del hogar
+- Interfaz :: Salida a línea de comando de los eventos que se van
+  generando.
+- Documentación :: [[./ZepedaErik/Proyecto2/Documentacion_ZepedaErik.pdf][Documentacion_ZepedaErik.pdf]]
+- Archivos :: [[./ZepedaErik/Proyecto2/Proyecto 2_ZepedaErik.py][Proyecto 2_ZepedaErik.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Un hilo lanza una tarea entrante cada 4 segundos, otro hilo lanza
+    una tarea saliente cada 6 segundos
+  - Señalización cruzada entre =TareaDom()= y =RemovTarea()=
+- Observaciones ::
+  - Interesante descripción que presentas. Me cuesta seguir la hebra
+    conductora, pero es una buena justificación 😉
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       1. |
+| Cumplimiento           |         5 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     1.67 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |      1.5 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |         5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |       7. |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
