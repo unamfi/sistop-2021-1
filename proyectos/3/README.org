@@ -1,4 +1,4 @@
-#+title: Proyecto 4: (Micro) sistema de archivos
+#+title: Proyecto 3: (Micro) sistema de archivos
 
 #+BEGIN_SRC yaml
 Planteamiento: 2020.12.08
@@ -48,7 +48,7 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
 - Por simplicidad, en todas las estructuras de FIUnamFS, las cadenas
   de texto deben ser ASCII 8-bit (/no/ Unicode UTF-8).
 - En las estructuras del disco, todos los enteros serán representados
-  como valores de 32 bits, en formato /big endian/.
+  como valores de 32 bits, en formato /little endian/.
   - Esto es, por ejemplo: El valor =1354= se representará como los
     bytes =(74, 5, 0, 0)= (porque =((0 * 256 + 0) * 256 + 5) * 256 +
     74 = 1354=). El valor =1234567890= se representará como los bytes
@@ -93,7 +93,6 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
     archivos especiales, siempre será el caracter =-= (=0x2d=, =45=)
   - 16--19 :: Tamaño del archivo, en bytes
   - 20--23 :: Cluster inicial
-  - 24 :: No se utiliza (¿reservado para expansión futura?)
   - 24--37 :: Hora y fecha de creación del archivo, especificando
               AAAAMMDDHHMMSS (p.ej. '20190509182600')
   - 38--51 :: Hora y fecha de última modificación del archivo,
