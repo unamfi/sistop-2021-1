@@ -48,14 +48,14 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
 - Por simplicidad, en todas las estructuras de FIUnamFS, las cadenas
   de texto deben ser ASCII 8-bit (/no/ Unicode UTF-8).
 - En las estructuras del disco, todos los enteros serán representados
-  como valores de 32 bits, en formato /big endian/.
+  como valores de 32 bits, en formato /little endian/.
   - Esto es, por ejemplo: El valor =1354= se representará como los
     bytes =(74, 5, 0, 0)= (porque =((0 * 256 + 0) * 256 + 5) * 256 +
     74 = 1354=). El valor =1234567890= se representará como los bytes
     =210, 2, 150, 7= (porque =((7 * 256 + 150) * 256 + 2) * 256 + 210
     = 1234567890=.
   - Para hacer las conversiones desde o hacia este formato, les
-    sugiero usar el formato =>L= con las funciones =pack()= y
+    sugiero usar el formato =<L= con las funciones =pack()= y
     =unpack()=, disponibles en distintos lenguajes ([[https://docs.python.org/3/library/struct.html][Python:
     struct.pack()]], [[https://ruby-doc.com/core/Array.html#method-i-pack][Ruby: Array#pack()]], [[https://perldoc.perl.org/perlpacktut][Perl: pack()]], [[https://www.php.net/manual/en/function.pack.php][PHP: pack()]], hay
     varias biblitecas que pueden usar para Javascript, como
