@@ -55,7 +55,7 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
     =210, 2, 150, 7= (porque =((7 * 256 + 150) * 256 + 2) * 256 + 210
     = 1234567890=.
   - Para hacer las conversiones desde o hacia este formato, les
-    sugiero usar el formato =<L= con las funciones =pack()= y
+    sugiero usar el formato =>L= con las funciones =pack()= y
     =unpack()=, disponibles en distintos lenguajes ([[https://docs.python.org/3/library/struct.html][Python:
     struct.pack()]], [[https://ruby-doc.com/core/Array.html#method-i-pack][Ruby: Array#pack()]], [[https://perldoc.perl.org/perlpacktut][Perl: pack()]], [[https://www.php.net/manual/en/function.pack.php][PHP: pack()]], hay
     varias biblitecas que pueden usar para Javascript, como
@@ -93,7 +93,6 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
     archivos especiales, siempre será el caracter =-= (=0x2d=, =45=)
   - 16--19 :: Tamaño del archivo, en bytes
   - 20--23 :: Cluster inicial
-  - 24 :: No se utiliza (¿reservado para expansión futura?)
   - 24--37 :: Hora y fecha de creación del archivo, especificando
               AAAAMMDDHHMMSS (p.ej. '20190509182600')
   - 38--51 :: Hora y fecha de última modificación del archivo,
