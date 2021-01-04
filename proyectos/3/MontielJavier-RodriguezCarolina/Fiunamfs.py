@@ -54,6 +54,8 @@ class Fiunamfs:
           self.sistema_archivo.seek(posicion+20)
           archivo.append(self.a_32.unpack(self.sistema_archivo.read(4))[0])
           archivos.append(archivo)
+        else:
+          archivos.append(nombre_archivo)
 
     return archivos
     
@@ -149,6 +151,8 @@ class Fiunamfs:
         self.sistema_archivo.write(info_archivo[1].encode())
         break
 
+      self.sistema_archivo.seek(posicion)
+      nombre_archivo = self.sistema_archivo.read(14)
     archivo_origen = open(ruta_sistema,"rb")
     contenido = archivo_origen.read(info_archivo[0])
     self.sistema_archivo.seek(cluster_inicial*1024)
@@ -191,11 +195,58 @@ class Fiunamfs:
       self.copiar_a_sistema(origen,destino)
     else:
       print("error argumento inválido")
-  #cp origen destino
-  #cp -l (del sistema al disckete) ar1 ar2
-  #cp ar1 ar2 (del disckete al sist)
 
-    '''
+  def archivo_existe(self,nombre_archivo):
+    posicion_directorio = 0
+    for i in range(0,64):
+      posicion = self.tamanio_cluster+(i*64)
+      self.sistema_archivo.seek(posicion)
+      nombre = self.sistema_archivo.read(14)
+
+      if nombre_archivo == nombre.decode().strip():
+        return posicion_directorio
+      posicion_directorio += 1
+    return -1
+
+  def elimina_entrada_directorio(self,posicion):
+    ubicacion = self.tamanio_cluster+(posicion*64)
+    self.sistema_archivo.seek(ubicacion)
+    self.sistema_archivo.write(b'Xx.xXx.xXx.xXx.')
+    self.sistema_archivo.seek(ubicacion+15)
+    self.sistema_archivo.write("-".encode())
+    self.sistema_archivo.seek(ubicacion+16)
+    self.sistema_archivo.write(self.a_32.pack(0000))
+    self.sistema_archivo.seek(ubicacion+24)
+    self.sistema_archivo.write("0000000000000000000000000000".encode())
+
+
+    
+  def rm(self,nombre_archivo):
+    posicion = self.archivo_existe(nombre_archivo)
+    if posicion != -1:
+      self.elimina_entrada_directorio(posicion)
+    else:
+      print("no esta")
+
+if __name__ == '__main__':
+  sistema = Fiunamfs()
+  
+  sistema.rm("README.org")
+
+'''
+#sistema.copiar_a_fiunamfs('/home/carol/Desktop/hola1.pdf','')
+  #sistema.ls()
+  cp origen destino
+  cp -l (del sistema al disckete) ar1 ar2
+  cp ar1 ar2 (del disckete al sist)
+
+    ***Eliminar de FiunamFS***
+    ->el archivo existe?
+      ->si existe elimina su entrada de directorio
+    ->ecc
+      ->mandar error
+
+
     
     -> verificar que el archivo existe
     -> obtener sus metadatos 
@@ -204,20 +255,14 @@ class Fiunamfs:
       ->si el tamaño > al del archivo
         ->pegar los metadatos al directorio
         ->pegar el contenido
-       
-
-    '''
-
-    '''
+   
     --tentativo para desfragmentar
     -> crear el bitmap para ver los espacios
     -> recorrer el bitmap
       -> en caso de encontrar un hueco 
         -> analizar tamaño del hueco 
         -> recorrer el siguiente bloque de informacion al espacio hueco
-    '''
 
-    '''
     -> listamos todos los archivos 
     -> vemos si podemos ordenar todo en base al cluster de inicio
     [[x,6],[x,5]] -> [[x,5],[x,6]]
@@ -230,17 +275,17 @@ class Fiunamfs:
     ->  si no se logro encontrar hueco entre clusters vemos si hay espacio desde el ultimo cluster
     hasta el final del espacio disponible en disco 
     -> en caso de haber espacio almacenamos el archivo al final 
-    '''
 
 
-if __name__ == '__main__':
-  sistema = Fiunamfs()
-  sistema.copiar_a_fiunamfs('/home/carol/Desktop/hola1.pdf','')
-  #sistema.ls()
-
-'''
 -> readme tam = 30751 c = 5
 -> logo tam = 0 c = 37
 -> datetime tam 63 c = 352
 -> hola tam 4000  c =  38
+
+
+Cosas que hay que agregar o quitar 
+-> cuando copiamos el nombre quitar las xxx sobrantes
+-> cambiar en la lectura del nombre de 14 a 15 
+-> cambiar la cadena b'Xx.xXx.xXx.xXx' a b'Xx.xXx.xXx.xXx.' 
+
 '''
