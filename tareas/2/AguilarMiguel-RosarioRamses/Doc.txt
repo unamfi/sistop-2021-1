@@ -1,0 +1,8 @@
+Programa que compara planificadores
+Implementado en python 3.9.0
+Escrito en Atom Nightly
+Alumnos: Aguilar Barcena Miguel Angel y Rosario Callejas Ramses
+Sistemas Operativos
+Semestre 2021-1
+
+Ejecucion con python tarea.py
