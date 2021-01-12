@@ -1,24 +1,40 @@
 #!/usr/bin/python3 
+'''
+@Autores:         Montiel Martinez Luis Javier
+                  Rodríguez Dávalos Carolina 
+
+@Fecha creación:  28/12/2020
+@Descripción:     Implementación de un sistema de archivos para el disquete FIunamFS
+
+'''
+
 import os, struct, time, datetime, math
 
 class Fiunamfs:
+
   def __init__(self):
     self.tamanio_sector = 512
+    #Como un cluster mide 2 sectores se uso como referencia para la definicion de dicho valor
     self.tamanio_cluster = 2*self.tamanio_sector
     self.sistema_archivo = open("fiunamfs.img","r+b")
+    #Establecemos una estructura que opere en formato little endian a 32 bits
+    #Se usará con el fin de poder traducir numeros en hexadecimal a decimal usando
+    #Las funciones unpack() y pack() para su proposito contrario
     self.a_32 = struct.Struct('<L')
 
   def verificacion(self):
-    self.sistema_archivo.seek(21)
-    nombre = self.sistema_archivo.read(15)
-    
-    if nombre == "FiUnamFS2021-1".encode():
+    #Se realiza la verificación que el nombre del sistema de archivos sea correcto
+    self.sistema_archivo.seek(0)
+    nombre = self.sistema_archivo.read(9)
+    #En caso de validar el nombre lee los demás metadatos
+    if nombre == "FiUnamFS".encode():
 
       self.sistema_archivo.seek(10)
       version = self.sistema_archivo.read(4)
       self.sistema_archivo.seek(20)
       etiqueta = self.sistema_archivo.read(16)
       self.sistema_archivo.seek(40)
+      #El método unpack devuelve una tupla y recuperamos posición cero para obtener el dato deseado
       tamanio_cluster = self.a_32.unpack(self.sistema_archivo.read(4))[0]
       self.sistema_archivo.seek(44)
       num_clusters_directorio = self.a_32.unpack(self.sistema_archivo.read(4))[0]
@@ -32,14 +48,15 @@ class Fiunamfs:
       print('Numero de clusters por directorio: ',num_clusters_directorio)
       print('Número de clusters que mide la unidad completa: ',num_clusters_unidad)
 
-
     else:
       print('Con este disco no puedo trabajar')
       self.sistema_archivo.close()
 
   def listar_archivos(self, metadatos = False):
+    #Función que lista el nombre de los archivos con base al argumento metadatos
     archivos = []
 
+    #Recorre todas las posibles entradas del directorio 
     for i in range(0,64):
       posicion = self.tamanio_cluster+(i*64)
       self.sistema_archivo.seek(posicion)
@@ -59,14 +76,8 @@ class Fiunamfs:
 
     return archivos
     
-
-  def ls(self):
-    lista_archivos = self.listar_archivos(True)
-
-    for i in lista_archivos:
-      print("-> ",i[0].decode(),"Tamaño: ",i[1]," Cluster inicial",i[2])
-
   def existe_archivo(self, nombre_archivo):
+    #Verifica la existencia de un archivo en el disquete
     archivos = self.listar_archivos(True)
     for i in archivos:
       if nombre_archivo == i[0].decode().strip():
@@ -75,9 +86,12 @@ class Fiunamfs:
     return None
 
   def existe_archivo_en_sistema(self,ruta_sistema):
+    #Verifica la existencia de un archivo en el sistema
     return os.path.isfile(ruta_sistema)
 
   def convertir_a_formato_fecha(self,fecha_en_segundos):
+    #Convierte el tiempo representado en segundos al formato necesario para el
+    #disqute
     return datetime.datetime.fromtimestamp(fecha_en_segundos).strftime("%Y%m%d%I%M%S")
       
   def obtener_info_archivo(self,ruta_sistema):
@@ -93,23 +107,33 @@ class Fiunamfs:
     if len(archivos_almacenados) > 0:
       for i in archivos_almacenados:
         tamanio_ocupado += i[1]
-    
+    #Se considera el espacio total del disquete (1475560) convertidos a bytes y 
+    # se les resta el tamaño ocupado por todos los archivos en el floppy
+    # asi como el tamaño conformado por los clusters 0 a 4 (5120)
     tamanio_disponible = 1474560 - tamanio_ocupado - 5120
 
     return True if tamanio_disponible > tamanio_archivo else False
 
   
   def ordenar_archivos(self,lista_archivos,elemento_criterio):
+    #Función dedica a ordenar la lista de archivos existentes en base al cluster
+    #de inicio (dato[elemento_criterio])
     return sorted(lista_archivos, key=lambda dato: dato[elemento_criterio])
 
   def asigna_cluster_inicial(self,tamanio_archivo):
     archivos = self.listar_archivos(True)
     archivos = self.ordenar_archivos(archivos,2)
+    #Busca en todo el disquete un cluster en el cual quepa nuestro archivo
+    #deseado
     for i in range (0,len(archivos)-1):
+      #obtenermos el tamaño en base al numero de clusters que ocupa el archivo
+      #a analizar (archivos[i][1])
       tamanio_en_clusters = math.floor(archivos[i][1]/1024)
+      #calculamos el cluster final del archivo en el cual se ubica
       cluster_final_actual = archivos[i][2] + tamanio_en_clusters
       tamanio_en_clusters = math.floor(archivos[i+1][1]/1024)
       cluster_final_siguiente = archivos[i+1][2] + tamanio_en_clusters
+      #obtenemos el espacio que puede existir entre dos archivos
       espacio_entre_bloques = (cluster_final_siguiente - cluster_final_actual) - 1
       if espacio_entre_bloques >= math.floor(tamanio_archivo/1024):
         return cluster_final_actual + 1
@@ -123,6 +147,8 @@ class Fiunamfs:
     return -1
 
   def escribe_archivo(self,ruta_sistema,info_archivo,cluster_inicial):
+    #Método que se encarga de colocar el archivo en el espacio ideal dentro del 
+    #disquete
     nombre = ruta_sistema.split('/')
     for i in range(0,64):
       posicion = self.tamanio_cluster+(i*64)
@@ -136,9 +162,6 @@ class Fiunamfs:
 
         self.sistema_archivo.seek(posicion+15)
         self.sistema_archivo.write("-".encode())
-
-        # self.sistema_archivo.seek(posicion+15)
-        # self.sistema_archivo.write(self.a_32.pack(info_archivo[0]))
 
         self.sistema_archivo.seek(posicion+16)
         self.sistema_archivo.write(self.a_32.pack(info_archivo[0]))
@@ -177,28 +200,21 @@ class Fiunamfs:
       print("no existe :c")
 
   def copiar_a_sistema(self,origen,destino):
+    #Método que se posiciona en el lugar indicado dentro del disqute para 
+    #leer el archivo a copiar y escribirlo dentro de la unidad
     archivo = self.existe_archivo(origen)
-    print(archivo)
     if archivo != None:
       self.sistema_archivo.seek(archivo[2]*self.tamanio_cluster)
       contenido = self.sistema_archivo.read(archivo[1])
-      destino = open(destino+archivo[0].decode().strip(),"wb")
+      destino = open(destino+archivo[0].decode().strip,"wb")
       destino.write(contenido)
       destino.close()
       print("se copio")
     else:
       print("no se copio")
         
-
-  def cp(self,origen,destino,l=None):
-    if l != None and l == "-l":
-      print("al disquete")
-    elif l == None:
-      self.copiar_a_sistema(origen,destino)
-    else:
-      print("error argumento inválido")
-
   def archivo_existe(self,nombre_archivo):
+    #Método el cual verifica si dentro del floppy existe dicho archivo
     posicion_directorio = 0
     for i in range(0,64):
       posicion = self.tamanio_cluster+(i*64)
@@ -211,6 +227,8 @@ class Fiunamfs:
     return -1
 
   def elimina_entrada_directorio(self,posicion):
+    #Método en el cual formatea cierta entrada de memoria a su configuracion por
+    #defecto
     ubicacion = self.tamanio_cluster+(posicion*64)
     self.sistema_archivo.seek(ubicacion)
     self.sistema_archivo.write(b'Xx.xXx.xXx.xXx.')
@@ -221,68 +239,34 @@ class Fiunamfs:
     self.sistema_archivo.seek(ubicacion+24)
     self.sistema_archivo.write("0000000000000000000000000000".encode())
 
-
-    
+  def exit(self):
+    self.sistema_archivo.close()
+      
   def rm(self,nombre_archivo):
     posicion = self.archivo_existe(nombre_archivo)
     if posicion != -1:
       self.elimina_entrada_directorio(posicion)
     else:
       print("no esta")
+      
+  def cp(self,origen,destino,l=None):
+    if l != None and l == "-l":
+      print("al disquete")
+    elif l == None:
+      self.copiar_a_sistema(origen,destino)
+    else:
+      print("error argumento inválido")
+
+  def ls(self):
+    #Función que muestra los elementos provenientes del disquete
+    lista_archivos = self.listar_archivos()
+
+    for i in lista_archivos:
+      print("-> ",i[0].decode(),"Tamaño: ",i[1]," Cluster inicial",i[2])
 
 if __name__ == '__main__':
   sistema = Fiunamfs()
   #sistema.copiar_a_fiunamfs("/home/javier/Downloads/tmp/ideas_expo.txt","")
   #sistema.ls()
   #sistema.rm("README.org")
-  #sistema.copiar_a_sistema("datetime.txt","/tmp/")
-
-'''
-  #sistema.ls()
-  cp origen destino
-  cp -l (del sistema al disckete) ar1 ar2
-  cp ar1 ar2 (del disckete al sist)
-
-    ***Eliminar de FiunamFS***
-    ->el archivo existe?
-      ->si existe elimina su entrada de directorio
-    ->ecc
-      ->mandar error
-
-
-    
-    -> verificar que el archivo existe
-    -> obtener sus metadatos 
-    -> listar_archivos(True)
-      ->sumar el tamaño de todos los archivos
-      ->si el tamaño > al del archivo
-        ->pegar los metadatos al directorio
-        ->pegar el contenido
-   
-    --tentativo para desfragmentar
-    -> crear el bitmap para ver los espacios
-    -> recorrer el bitmap
-      -> en caso de encontrar un hueco 
-        -> analizar tamaño del hueco 
-        -> recorrer el siguiente bloque de informacion al espacio hueco
-
-    -> listamos todos los archivos 
-    -> vemos si podemos ordenar todo en base al cluster de inicio
-    [[x,6],[x,5]] -> [[x,5],[x,6]]
-    -> analizamos si el cluster actual y el proximo es el continuo (para todo el arreglo) (si el cluster es el 12 y pesa 3 clusters, termina 
-    en el 15, por lo tanto el proximo archivo inicie en el cluster 16)
-      -> en caso de que no vemos cuanto espacio hay
-      -> analizamos si el espacio es suficiente para almacenar el archivo 
-      -> si el tamaño es suficiente lo escribimos tanto en el directorio como en el espacio disponible 
-      ->en caso contrario seguimos 
-    ->  si no se logro encontrar hueco entre clusters vemos si hay espacio desde el ultimo cluster
-    hasta el final del espacio disponible en disco 
-    -> en caso de haber espacio almacenamos el archivo al final 
-
-
--> readme tam = 30751 c = 5
--> logo tam = 0 c = 37
--> datetime tam 63 c = 352
--> hola tam 4000  c =  38
-
-'''
+  #sistema.copiar_a_sistema("datetime.txt","/tmp/")    print(archivo).(),"wb")
