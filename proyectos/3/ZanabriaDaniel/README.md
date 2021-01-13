@@ -9,3 +9,5 @@ Reestructuración del código para eficientar la ejecución
 Implementación de conceptos vistos
 
 No se logró cubrir la parte de la defragmentación pues el código sigue dejando un "espacio" cuando se borra un archivo.
+
+NOTA: SE NECESITA EJECUTAR CON PYTHON 2, basta con instalarlo para poder ejecutarlo sin problemas.

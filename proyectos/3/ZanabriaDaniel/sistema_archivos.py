@@ -272,13 +272,12 @@ def main():
 				main()
 				
 	else:
-		print("error: no se pudo montar correctamente")
+		print("error: no se logró abrir el sistema de archivos")
 		return
 
 #funcion para obtener la informacion del sistema de archivos
 obtenerInformacion()
-print("Informacion:")
-print("Nombre: "+info[0] + "\nVersion: "+info[1] +"\nEtiqueta Volumen:"+info[2]+"\nTamano Cluster: "+info[3]+"\nNumero de Clusters: "+info[4]+ "\nNumero Total de Clusters: "+info[5]+"\n\n")
+print("Información:\nNombre: "+info[0] + "\nVersion: "+info[1] +"\nEtiqueta Volumen:"+info[2]+"\nTamano Cluster: "+info[3]+"\nNumero de Clusters: "+info[4]+ "\nNumero Total de Clusters: "+info[5]+"\n\n")
 
 #funcion principal
 main()
