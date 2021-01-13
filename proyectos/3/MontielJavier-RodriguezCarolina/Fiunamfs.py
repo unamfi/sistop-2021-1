@@ -9,6 +9,7 @@
 '''
 
 import os, struct, time, datetime, math
+from getpass import getuser
 
 class Fiunamfs:
 
@@ -184,7 +185,7 @@ class Fiunamfs:
     self.sistema_archivo.write(contenido)
     archivo_origen.close()
 
-  def copiar_a_fiunamfs(self,ruta_sistema,ruta_disqute):
+  def copiar_a_fiunamfs(self,ruta_sistema):
     if self.existe_archivo_en_sistema(ruta_sistema): 
       info_archivo = self.obtener_info_archivo(ruta_sistema)
       if self.verifica_espacio_disponible(info_archivo[0]):
@@ -206,10 +207,9 @@ class Fiunamfs:
     if archivo != None:
       self.sistema_archivo.seek(archivo[2]*self.tamanio_cluster)
       contenido = self.sistema_archivo.read(archivo[1])
-      destino = open(destino+archivo[0].decode().strip,"wb")
+      destino = open(destino+archivo[0].decode().strip(),"wb")
       destino.write(contenido)
       destino.close()
-      print("se copio")
     else:
       print("no se copio")
         
@@ -241,6 +241,7 @@ class Fiunamfs:
 
   def exit(self):
     self.sistema_archivo.close()
+    return False
       
   def rm(self,nombre_archivo):
     posicion = self.archivo_existe(nombre_archivo)
@@ -250,10 +251,19 @@ class Fiunamfs:
       print("no esta")
       
   def cp(self,origen,destino,l=None):
+    #Función encargada de copiar un archivo, ya sea del sistema a fiunamfs
+    #o de fiunamfs al sistema
+    #NOTA: consideramos que la linea de comandos se ingrese ruta absoluta en
+    #siempre que se refiera uno al sistema del usuario y terminar con / en caso de 
+    # copiarse un archivo a fiunamfs 
+    #(ej. /home/fulano/.../carpeta destino/)
+    #
+    #Para el caso de copiar un archivo a fiunamfs se debe de colocar la ruta absoluta
+    #(ej. /home/fulano/.../carpeta destino/nombre archivo)
     if l != None and l == "-l":
-      print("al disquete")
-    elif l == None:
       self.copiar_a_sistema(origen,destino)
+    elif l == None:
+      self.copiar_a_fiunamfs(origen)
     else:
       print("error argumento inválido")
 
@@ -262,11 +272,62 @@ class Fiunamfs:
     lista_archivos = self.listar_archivos()
 
     for i in lista_archivos:
-      print("-> ",i[0].decode(),"Tamaño: ",i[1]," Cluster inicial",i[2])
+      print("->",i.decode())
+      
+  def ejecuta_comando(self,comando):
+    salida = True
+    op= comando[0]
+    if op == "exit":
+      salida = self.exit()
+    elif op == "cp":
+      if len(comando) >1 and comando[1] == '-l' and len(comando) == 4:
+        self.cp(comando[2],comando[3],comando[1])
+      elif len(comando) == 2:
+        self.cp(comando[1],'')
+      else:
+        print("\nNúmero de argumentos inválido")
+        print("La estructura correcta es: \n")
+        print("cp -l /<usuario>/.../carpeta destino/<nombre archivo> -> para copiar a fiunamfs")
+        print("cp <archivo en fiunamfs> /<usuario>/.../carpeta destino/ -> para copiar a fiunamfs\n")
+    elif op == "ls":
+      if len(comando) == 1:
+        self.ls()
+      else:
+        print("\nEstructura invalida")
+        print("La estructura completa es: \n\nls\n")
+    elif op == "rm":
+      if len(comando) == 2:
+        self.rm(comando[1])
+      else:
+        print("\nEstructura inválida")
+        print("La estructura correcta es: \n\nrm <nombre archivo>\n")
+    else:
+      print("Inválido")
+    
+    return salida
+    
+  
+  def tratar_cadena(self,comando):
+    return comando.split()
+
+  def inicia_interfaz(self):
+    salida = True
+    usuario = getuser()
+    while salida:
+      entrada = input("["+usuario+"@fiunamfs fiunamfs2021-1]$ ")
+      comando = self.tratar_cadena(entrada)
+      salida = self.ejecuta_comando(comando)
+      
 
 if __name__ == '__main__':
   sistema = Fiunamfs()
+  sistema.inicia_interfaz()
   #sistema.copiar_a_fiunamfs("/home/javier/Downloads/tmp/ideas_expo.txt","")
   #sistema.ls()
   #sistema.rm("README.org")
   #sistema.copiar_a_sistema("datetime.txt","/tmp/")    print(archivo).(),"wb")
+
+'''
+colocar que se considera el posicionamiento dentro de fiunamfs por lo que hay que
+poner ruta absoluta
+'''
