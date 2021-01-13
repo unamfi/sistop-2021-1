@@ -14,7 +14,7 @@ En una terminal ubicado en la ruta donde se encuentra el archivo, ejecutar el si
 ~~~
 $ python3 Fiunamfs.py
 ~~~
-Se requiere tener el archivo fiunamfs.img en la misma ruta
+Se requiere tener el archivo fiunamfs.img en la misma ruta que el archivo Fiunamfs.py
 
 ### Estrategia de resolución
 
