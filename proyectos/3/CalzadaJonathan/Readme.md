@@ -6,7 +6,11 @@ Lo que se puede hacer en el sistema de archivos crwado es
 +  Eliminar un archivo 
 
 
-#lo que no se pudo lograr  y errores
-+ Desfracmentar el sistema de archivos
+# lo que no se pudo lograr  y errores
++ Desfragmentar el sistema de archivos
 + Al eliminar queda un registro del archivo que estaba ahi, ya no aparece el nombre pero el registro de memoria se muestra en patalla al listar 
-+ 
+
+  
+    
+    
+  
