@@ -11,15 +11,15 @@
   como lo refleja la rúbrica, obtiene una calificación un poco más alta)
   el que ustedes me planteen los temas de su interés.
 
-  |------------+------------------------------+----------------------------------+-------+------------+------------|
-  |      Fecha | Tema                         | Integrantes                      | Video | Documentos | Evaluación |
-  |------------+------------------------------+----------------------------------+-------+------------+------------|
-  | 2021.01.19 | Buffer overflows             | Diego Armenta                    |       |            |            |
-  | 2021.01.21 | Git                          | Adolfo Marcelo, David Guerrero   |       |            |            |
-  | 2021.01.26 | Sistemas de inicio           | José Alfredo Nava                |       |            |            |
-  | 2021.01.26 | Sistemas de archivos remotos | Luis Montiel, Carolina Rodríguez |       |            |            |
-  | 2021.01.28 |                              | Jonathan Calzada                 |       |            |            |
-  |------------+------------------------------+----------------------------------+-------+------------+------------|
+  |------------+-------------------------------------------+----------------------------------+-------+------------+------------|
+  |      Fecha | Tema                                      | Integrantes                      | Video | Documentos | Evaluación |
+  |------------+-------------------------------------------+----------------------------------+-------+------------+------------|
+  | 2021.01.19 | Buffer overflows                          | Diego Armenta                    |       |            |            |
+  | 2021.01.21 | Git                                       | Adolfo Marcelo, David Guerrero   |       |            |            |
+  | 2021.01.26 | Sistemas de inicio                        | José Alfredo Nava                |       |            |            |
+  | 2021.01.26 | Sistemas de archivos remotos              | Luis Montiel, Carolina Rodríguez |       |            |            |
+  | 2021.01.28 | Diferencias entre distribuciones de Linux | Jonathan Calzada                 |       |            |            |
+  |------------+-------------------------------------------+----------------------------------+-------+------------+------------|
   #+TBLFM: 
 
 * Rúbrica de evaluación
