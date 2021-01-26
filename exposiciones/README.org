@@ -15,7 +15,7 @@
   |      Fecha | Tema                                      | Integrantes                      | Video   | Documentos                                              | Evaluación |
   |------------+-------------------------------------------+----------------------------------+---------+---------------------------------------------------------+------------|
   | 2021.01.19 | Buffer overflows                          | Diego Armenta                    | [[https://www.youtube.com/watch?v=RYIdX_sl4Ao][YouTube]] | [[./ArmentaDiego/ayuda_visual.odp][Documento (ODP)]], [[./ArmentaDiego/buffer_overflows.pdf][Presentación (PDF)]], [[./ArmentaDiego/overflow.c][Código ejemplo (C)]] |            |
-  | 2021.01.21 | Git                                       | Adolfo Marcelo, David Guerrero   |         |                                                         |            |
+  | 2021.01.21 | Git                                       | Adolfo Marcelo, David Guerrero   | [[https://youtu.be/HptZBVqQ-L8][YouTube]] |                                                         |            |
   | 2021.01.26 | Sistemas de inicio                        | José Alfredo Nava                |         |                                                         |            |
   | 2021.01.26 | Sistemas de archivos remotos              | Luis Montiel, Carolina Rodríguez |         |                                                         |            |
   | 2021.01.28 | Diferencias entre distribuciones de Linux | Jonathan Calzada                 |         |                                                         |            |
