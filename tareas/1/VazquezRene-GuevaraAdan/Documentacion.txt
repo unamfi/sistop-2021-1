@@ -1,0 +1,9 @@
+Sistemas Operativos 2021-1
+Tarea 1
+Rene Vazquez Peñaloza 
+Adan Yareth Guevara Mendoza 
+
+El problema a resolver es el Cruce del Rio, nos basamos en la solucion que se plantea en el libro The Little Book Of Semaphores, de Allen B. Downey,
+En donde los hackers y serfs esperan para abordar la canoa, ambas estan definidas por un MUTEX, y el hackerQueue y serfQueue son los que nos ayudan a controlar el numero de hacker y serfs a bordo 
+El programa se desarrollo en python se ejecuto en la version 3.8.2
+

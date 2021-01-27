@@ -1,0 +1,16 @@
+
+	Entorno de desarrollo:
+		El programa está realizado en python3.6
+		Se utilizan las siguientes bibliotecas:
+			-random
+			-threading
+			-time
+			-concurrent.futures
+			-string
+		Se probo y desarrollo bajo Ubuntu 18
+
+	Mecanismos y logica de operación:
+		El programa solo utiliza candados como mecanismo de sincronización para proteger las variables donde se encuentran registrados los asientos disponibles y ocupados.
+		Cada hilo simula la compra o devolución de un boleto de la sala, al llegar a la seccion crítica hace la solicitud del candado, para despues poder borrar o escribir el asiento encuestión dentro de larreglo correspondiente. Después se libera el candado para que los demás hilos puedan solicitar asientos.
+
+

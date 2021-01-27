@@ -1,0 +1,330 @@
+#+title: Calificaciones y comentarios del proyecto 3
+#+author: Gunnar Wolf
+
+El planteamiento del proyecto y la rúbrica para su calificación están
+[[./README.org][disponibles aquí]].
+
+* Entregas en tiempo
+** Javier Montiel y Carolina Rodríguez
+ - Documentación :: [[./MontielJavier-RodriguezCarolina/README.md][README.md]]
+ - Archivos :: [[./MontielJavier-RodriguezCarolina/Fiunamfs.py][Fiunamfs.py]]
+ - Lenguaje de desarrollo :: Python
+ - Interfaz :: Línea de comando
+ - Estrategia empleada ::
+   - Acceso a archivo empleando =seek=; uso amplio de lógica de
+     /base+desplazamiento/.
+ - Observaciones ::
+   - + 1 punto por corregir detalles en el planteamiento original
+     (incluido en la tabla)
+   - Incluyeron una copia del =fiunamfs.img=, idéntica a la mía. Bien,
+     es completamente válido -- Pero dado que la ejecución del programa
+     la modifica, debieron haberla declarado en un .gitignore.
+   - Ojo: Mencionan en los comentarios del código, «(..) formato
+     little endian a 32 bits. Se usará con el fin de poder traducir
+     numeros en hexadecimal a decimal usando las funciones unpack() y
+     pack()». Estas funciones no traducen entre representación decimal
+     y hexadecimal (para eso, usaríamos por ejemplo las conversiones
+     de cadenas de formato, %d y %x). Estas traducen entre /distintas
+     representaciones binarias/ de la información.
+   - El uso de los comandos =cp= y =cp -l= me desconcertó un poco. Por
+     ejemplo, el agregar el nombre del archivo, o el tener un nombre
+     tan similar (cuando en realidad son dos rutinas suficientemente
+     distintas)...
+   - No implementan la desfragmentación
+   - Me parece una muy buena implementación. Limpia, bastante
+     completa, y fácil de entender. ¡Felicidades!
+
+ | *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+ |-------------------------------------+-----------+--------+----------|
+ | *Proyecto*                          |           |    0.3 |     2.25 |
+ | Cumplimiento                        |       7.5 |        |     0.75 |
+ | Claridad de desarrollo              |        10 |        |     1.00 |
+ | Interfaz usuario                    |         5 |        |     0.50 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Desarrollo*                        |           |    0.3 |     2.75 |
+ | Directorio de proyecto              |       7.5 |        |     0.75 |
+ | Código válido                       |        10 |        |     1.00 |
+ | Comentarios                         |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Legibilidad*                       |           |    0.2 |     2.00 |
+ | Estructura                          |        10 |        |     1.00 |
+ | Nomenclatura                        |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Entrega*                           |           |    0.2 |     2.00 |
+ | Entorno y dependencias              |        10 |        |     1.00 |
+ | Historia en Git                     |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Extras*                            |           |        |     1.00 |
+ | Envió correcciones al planteamiento |        10 |    0.1 |     1.00 |
+ | Directorios jerárquicos             |           |    0.1 |     0.00 |
+ | Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *TOTAL*                             |           |        |    10.00 |
+ |-------------------------------------+-----------+--------+----------|
+ #+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+** Daniel Zanabria
+ - Documentación :: [[./ZanabriaDaniel/README.md][README.md]]
+ - Archivos :: [[./ZanabriaDaniel/sistema_archivos.py][sistema_archivos.py]], [[./ZanabriaDaniel/fiunamfs.img][fiunamfs.img]]
+ - Lenguaje de desarrollo :: Python
+ - Interfaz :: Línea de comando con menú numérico de opciones
+ - Estrategia empleada ::
+   - Abre el FS en cada una de las invocaciones; realiza una serie de
+     =seek()= + =read()/write()=
+ - Observaciones ::
+   - Me planteas una evaluación complicada... Si bien les indiqué que
+     pueden "inspirarse" de las resoluciones realizadas por sus
+     compañeros, no es lo mismo inspirarse y reutilizarla
+     - Pero, por el lado positivo, das crédito, no ocultas lo que
+       hiciste, y eso es positivo. Y doy fé de que sí le /metiste
+       tijera/.
+     - Acepto tu entrega... Pero el copiar sin verificar / reelaborar
+       la lógica ante el nuevo planteamiento no te dio un muy buen
+       resultado ☹
+   - No cumple con las especificaciones que recibiste. De semestre
+     en semestre, varío algunos parámetros del sistema de archivos
+     (y por eso cambia su versión). Podrías haber tomado la entrega
+     de Jorge y Brian y modificarlo para que opere con las
+     especificaciones que les dí.
+     - Si intento ejecutar este código sobre el sistema de archivos
+       que tú incluyes, sí funciona (hace falta sólo un cambio para
+       que funcione). Pero si lo intento ejecutar con el sistema de
+       archivos de referencia que les dí, cae en excepción al
+       intentar leer la primera entrada del directorio, porque su
+       formato es distinto.
+   - Ya en la evaluación de la entrega que ellos hicieron indiqué
+     que el soporte para Python 2.x está por terminar. Tendrías que
+     haber encontrado qué requerías para que operara bajo Python 3,
+     en vez de copiar la advertencia.
+     - Pero en realidad... ¡Sí funciona bajo Python 3! Lo único que
+       tuve que cambiar fue cambiar tu línea 228:
+
+       =option = input("¿Que deseas hacer? ")=
+
+       por:
+
+       =option = int(input("¿Que deseas hacer? "))=
+   - El exceso de comentarios entorpece la lectura del código, en
+     vez de ayudar a compranderlo.
+   - Incluyes un sistema de archivos como parte de tu entrega. Si lo
+     modifico (como lo indica el planteamiento), Git marcará que hay
+     cambios en los archivos. Deberías haberlo declarado en
+     =.gitignore=.
+
+
+ | *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+ |-------------------------------------+-----------+--------+----------|
+ | *Proyecto*                          |           |    0.3 |     1.00 |
+ | Cumplimiento                        |         0 |        |     0.00 |
+ | Claridad de desarrollo              |         5 |        |     0.50 |
+ | Interfaz usuario                    |         5 |        |     0.50 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Desarrollo*                        |           |    0.3 |     2.25 |
+ | Directorio de proyecto              |       7.5 |        |     0.75 |
+ | Código válido                       |       7.5 |        |     0.75 |
+ | Comentarios                         |       7.5 |        |     0.75 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Legibilidad*                       |           |    0.2 |     1.50 |
+ | Estructura                          |         5 |        |     0.50 |
+ | Nomenclatura                        |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Entrega*                           |           |    0.2 |     1.00 |
+ | Entorno y dependencias              |         5 |        |     0.50 |
+ | Historia en Git                     |         5 |        |     0.50 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Extras*                            |           |        |     0.00 |
+ | Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+ | Directorios jerárquicos             |           |    0.1 |     0.00 |
+ | Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *TOTAL*                             |           |        |     5.75 |
+ |-------------------------------------+-----------+--------+----------|
+ #+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+** Erik Zepeda
+ - Documentación :: [[./ZepedaErik/Proyecto3/Documentacion_p3.pdf][Documentacion_p3.pdf]]
+ - Archivos :: [[./ZepedaErik/Proyecto3/MSArchivos_p3.py][MSArchivos_p3.py]]
+ - Lenguaje de desarrollo :: Python
+ - Interfaz :: Invocación desde línea de comando, con cada operación
+   especificada por una opción (mediante =argparse=)
+ - Estrategia empleada ::
+   - Carga al sistema de archivos completo en memoria, opera
+     desde ahí dependiendo de la acción solicitada
+ - Observaciones ::
+   - Está bien que emitas una ayuda para obtener el uso de tu
+     herramienta, pero... Piensa en un usuario de tu programa: ¿Cómo
+     va a saber que =-h= le va a dar las instrucciones? ¡Sé un poco
+     más generoso!
+     - En tu documentación (o más bien, en la /descripción del
+       proyecto) mencionas la relación de /algunas letras con las
+       diferentes acciones/... Pero no explicas qué
+     - Realizar documentación técnica es una habilidad profesional
+       importantísima. Se ve que intentaste crear un buen
+       documento... Pero tengo que recomendarte trabajar en mejorar
+       tus habilidades de redacción.
+   - Falta implementar la copia de archivos desde "afuera" y la
+     eliminación de archivos
+   - ¡Muy bueno por reutilizar el código de terceros! Excelente
+     elección con =argparse=.
+
+ | *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+ |-------------------------------------+-----------+--------+----------|
+ | *Proyecto*                          |           |    0.3 |     2.25 |
+ | Cumplimiento                        |         5 |        |     0.50 |
+ | Claridad de desarrollo              |        10 |        |     1.00 |
+ | Interfaz usuario                    |       7.5 |        |     0.75 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Desarrollo*                        |           |    0.3 |     3.00 |
+ | Directorio de proyecto              |        10 |        |     1.00 |
+ | Código válido                       |        10 |        |     1.00 |
+ | Comentarios                         |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Legibilidad*                       |           |    0.2 |     2.00 |
+ | Estructura                          |        10 |        |     1.00 |
+ | Nomenclatura                        |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Entrega*                           |           |    0.2 |     1.50 |
+ | Entorno y dependencias              |        10 |        |     1.00 |
+ | Historia en Git                     |         5 |        |     0.50 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Extras*                            |           |        |     0.00 |
+ | Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+ | Directorios jerárquicos             |           |    0.1 |     0.00 |
+ | Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *TOTAL*                             |           |        |     8.75 |
+ |-------------------------------------+-----------+--------+----------|
+ #+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+
+
+* Entregas extemporáneas (calificación × 0.8)
+** Diego Armenta
+ - Documentación :: [[./ArmentaDiego/README.md][README.md]]
+ - Archivos :: [[./ArmentaDiego/fs.py][fs.py]], [[./ArmentaDiego/fiunamfs.img][fiunamfs.img]]
+ - Lenguaje de desarrollo :: Python
+ - Interfaz :: Línea de comando
+ - Estrategia empleada ::
+   - Se abre el FS una sola vez y se mantiene como atributo del objeto
+     =FileSystem=
+ - Observaciones ::
+   - Buena separación de funcionalidad con UI. ¡Bien!
+   - No implementa la copia de archivo del sistema hacia el FS
+   - ¡Bien! Por fin reviso uno que sí implementa la desfragmentación
+
+ | *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+ |-------------------------------------+-----------+--------+----------|
+ | *Proyecto*                          |           |    0.3 |     2.50 |
+ | Cumplimiento                        |       7.5 |        |     0.75 |
+ | Claridad de desarrollo              |        10 |        |     1.00 |
+ | Interfaz usuario                    |       7.5 |        |     0.75 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Desarrollo*                        |           |    0.3 |     3.00 |
+ | Directorio de proyecto              |        10 |        |     1.00 |
+ | Código válido                       |        10 |        |     1.00 |
+ | Comentarios                         |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Legibilidad*                       |           |    0.2 |     2.00 |
+ | Estructura                          |        10 |        |     1.00 |
+ | Nomenclatura                        |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Entrega*                           |           |    0.2 |     1.50 |
+ | Entorno y dependencias              |        10 |        |     1.00 |
+ | Historia en Git                     |         5 |        |     0.50 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Extras*                            |           |        |     0.00 |
+ | Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+ | Directorios jerárquicos             |           |    0.1 |     0.00 |
+ | Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | TOTAL                               |           |        |     9.00 |
+ | *Total × 0.8* (extemporáneo)        |           |        |     7.20 |
+ |-------------------------------------+-----------+--------+----------|
+ #+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2::@21$4=@20*0.8 ; f-2
+
+** +Jonathan Calzada+
+
+   [[./CalzadaJonathan/sistarchivos.py][El programa que entregaste]] para este proyecto fue _copiado_ del
+   [[https://github.com/gwolf/sistop-2019-2/blob/master/proyectos/3/AguilarGabriel-GarciaSandra/manejador.py][presentado hace dos años]] por tus compañeros. No únicamente eso —
+   Modificaste las cadenas y nombres de funciones para que resultara
+   más difícil detectar el plagio.
+
+   Puedo conceder que intentaste entender el programa de tus
+   compañeros, pero no lo verificaste ni adecuaste respecto a las
+   indicaciones de formato que yo les dí. Poniéndolo en términos
+   formales, el formato del sistema de archivos 0.4 no es compatible
+   con el formato 1.0.
+
+   *Calificación:* 0
+
+** José Nava
+ - Documentación :: [[./NavaJose/README.md][README.md]]
+ - Archivos :: [[./NavaJose/fsfiunam.py][fsfiunam.py]], [[./NavaJose/fiunamfs.img][fiunamfs.img]]
+ - Lenguaje de desarrollo :: Python
+ - Interfaz :: Línea de comando
+ - Estrategia empleada ::
+   - 
+ - Observaciones ::
+   - Se ve que le pusiste empeño a la presentación de la interfaz. ¡Bien!
+     - Peroooo.... si lanzas el programa, no hay /nada/ que te indica
+       que puedes pedirle ayuda. Piensa en un usuario final.
+     - Ya que le diste =help=, te dice =Escriba help para ver esta
+       lista=. Pero, ¿qué va a saber un usuario para eso?
+     - No implementas defragmentación, copia desde ni copia hacia ☹
+     - Hay que encontrar un buen balance al comentar el código. Si no
+       hay comentarios, tu código es difícil de leer. Pero si comentas
+       casi a cada línea, incluso si lo que estás buscando hacer
+       resulta obvio... También dificulta la lectura. En el caso de tu
+       programa, me atrevo a decir que está /sobre-comentado/.
+     - Me parece muy bueno que hagas el uso de tu programa más
+       amigable dándole color. Sin embargo, escribir cada vez las
+       secuencias ANSI para este cambio... es sin duda una monserga,
+       poco claro, y fácil de fallar (es difícil detectar que
+       escribiste algo mal). Te sugiero, cuando hagas estas cosas,
+       declarar primero un arreglo:
+       #+begin_src python
+	 colores = {'aqua': "\x1b[1;36m",
+		    'normal': "\033[0;m",
+		    'amarillo': "\x1b[1;33m",
+		    # etc
+		    }
+       #+end_src
+       Y ya sólo tendrías que imprimir:
+       #+begin_src python
+	 print(colores['amarillo'], '¡Hola ', colores['aqua'], 'mundo!', colores['normal'])
+       #+end_src
+   - Incluyes un sistema de archivos como parte de tu entrega. Si lo
+     modifico (como lo indica el planteamiento), Git marcará que hay
+     cambios en los archivos. Deberías haberlo declarado en
+     =.gitignore=.
+
+ | *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+ |-------------------------------------+-----------+--------+----------|
+ | *Proyecto*                          |           |    0.3 |     2.50 |
+ | Cumplimiento                        |         5 |        |     0.50 |
+ | Claridad de desarrollo              |        10 |        |     1.00 |
+ | Interfaz usuario                    |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Desarrollo*                        |           |    0.3 |     2.50 |
+ | Directorio de proyecto              |       7.5 |        |     0.75 |
+ | Código válido                       |        10 |        |     1.00 |
+ | Comentarios                         |       7.5 |        |     0.75 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Legibilidad*                       |           |    0.2 |     2.00 |
+ | Estructura                          |        10 |        |     1.00 |
+ | Nomenclatura                        |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Entrega*                           |           |    0.2 |     2.00 |
+ | Entorno y dependencias              |        10 |        |     1.00 |
+ | Historia en Git                     |        10 |        |     1.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | *Extras*                            |           |        |     0.00 |
+ | Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+ | Directorios jerárquicos             |           |    0.1 |     0.00 |
+ | Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+ |-------------------------------------+-----------+--------+----------|
+ | TOTAL                               |           |        |     9.00 |
+ | *Total × 0.8* (extemporáneo)        |           |        |     7.20 |
+ |-------------------------------------+-----------+--------+----------|
+ #+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2::@21$4=@20*0.8 ; f-2
+

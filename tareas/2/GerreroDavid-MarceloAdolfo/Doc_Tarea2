@@ -1,0 +1,8 @@
+Lenguaje ocupado: Python 3
+
+Se desarrollo un programa que genere varias cargas aleatorias, y 
+compara el resultado sobre varias ejecuciones. las ejecuciones pueden ser determinadas por el usuario
+para poder comparar las tendencias.
+
+Se implementaron algoritmos para ejecutar los mecanismos de planificación de procesos: First In, First Out (FIFO),
+Round Robin(RR) y Shortest Process Next (SPN).  

@@ -1,0 +1,18 @@
+*El problema que se resolvio fue 
+-"INTERSECCION DE CAMINOS".
+
+
+*El lenguaje y entorno
+-Desarrollé mi tarea en PYTHON en conjunto con el editor de codigo Visual Studio Code.
+
+
+*¿Qué tengo que saber / tener / hacer para ejecutar su programa en mi computadora?
+-El programa se realizó en python por lo qe sería ideal tener alguna versión de python y algún otro editor de codigo para una visualización concreta.
+
+
+*La estrategia de sincronización (mecanismo / patrón) que les funcionó
+Se usó el modulo threading que tiene varios metodos utiles. principalmente el de Semaphore() que me ayudó en la parte de sincronización de hilos. 
+
+*He de admitir que en un momento de inspiración he logrado abstraer algunos conceptos de programas ya vistos para armar mi codigo. Claro que influye el desarrollo del tema y la falta de práctica lo que ha hecho que el máximo reto sea implementar el codigo. Mi programa es realmente corto considero que cubre aspectos basicos. Es posible implementarse sin clase pero considero que al crearse un hilo por carro es mejor para tener mas control de ejecución.  
+
+

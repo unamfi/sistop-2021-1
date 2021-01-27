@@ -1,0 +1,400 @@
+#+title: Revisión de la tarea 1
+#+options toc:nil num:nil
+
+* Criterios de calificación
+
+- Documentación :: 2 puntos
+- Programa funcional :: 2 puntos
+- Planteamiento resuelto satisfactoriamente :: 3 puntos
+- Aplicación de los principios vistos en clase :: 3 puntos
+
+* Problema /El elevador/
+
+** Diego Armenta
+- Documentación :: [[./ArmentaDiego/LEEME.txt][LEEME.txt]]
+- Código :: [[./ArmentaDiego/ejercicio.py][ejercicio.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Veo que usas una forma de crear los hilos distinta a la que les
+    enseñé en casa, más limpia en tanto orientación a objetos, en que
+    cada clase hereda de =threading.Thread=. ¡Muy bien! ☺
+  - El problema que describes en la documentación puede deberse a que
+    no has terminado de interiorizar el modelo de sincronización en
+    que les insistí: Si estás haciendo algo como:
+    #+begin_src python
+      while (self.pd != self.e.pa):
+	  time.sleep(1)
+	  print(self.id, "Viajando en elevador")
+    #+end_src
+    me da a ver claramente que no estás usando mecanismos de
+    sincronización entre las personas y el elevador — ¡que es el punto
+    principal del ejercicio!
+  - Este ejercicio se resuelve correctamente con un par de
+    señalizaciones: Típicamente, las personas se duermen
+    (=sem.acquire()=) esperando a que llegue el elevador a su piso,
+    posiblemente en un arreglo por cada piso; el elevador va lanzando
+    =release()= al número de personas para las cuales haya capacidad
+    de carga.
+- Calificación :: 2 + 2 + 1.5 + 1.5 = *7*
+
+* Problema /Los alumnos y el asesor/
+
+** Daniel Cruz
+- Documentación :: [[./CruzDaniel/Documentacion.md][Documentacion.md]]
+- Código :: [[./CruzDaniel/Tarea1.py][Tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Muy buena documentación! Gracias por facilitarme la comprensión
+    de tu lógica.
+  - Me gusta que hayas tomado los paralelismos que sin duda hay con el
+    otro programa que desarrollamos.
+  - De acuerdo con lo que dices, hay más de un punto de tu código en
+    que el actor “equivocado” emite cierta cadena. Pero me parece que
+    la lógica general es correcta.
+  - Como único comentario de estilo: Tanto en tu código como en la
+    documentación hablas del uso de un =multiplex=. El uso que les
+    das, sin embargo, es de señalización: El alumno hace los
+    =acquire()= y el profesor hace los =release()=. Esto es, a fin de
+    cuentas, por lo de la línea inmediata anterior que menciono: El
+    profesor dice, =Alumno se va ...= (que debería haberlo dicho el
+    alumno), y podría verse como que carga al alumno y lo deposita del
+    lado de afuera de la puerta 😉
+    - Yo sugeriría que, tras plantear la pregunta, el alumno esperara
+      a una señalización, y tras recibir el =release()= por parte del
+      profesor, el alumno fuera quien libere =mutex_orden= (e
+      imprimiera =Alumno se va ...=).
+- Calificación :: 2 + 2 + 2 + 2 = *8*
+
+** Luis Quintanar
+- Documentación :: [[./LuisQuintanar/README.txt][README.txt]]
+- Código :: [[./LuisQuintanar/alumnos_y_asesor.py][alumnos_y_asesor.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - A nivel estilístico en tu código: Evita escribir tu comentario
+    al término de la línea de la que estás hablando, se considera
+    mucho más legible poner el comentario en la línea inmediata
+    anterior. Esto es, en vez de:
+    #+begin_src python
+      if len(alumnos_sentados) < numero_de_sillas: 	# Checa si hay asientos disponibles
+    #+end_src
+    es más fácil leer:
+    #+begin_src python
+      # Checa si hay asientos disponibles
+      if len(alumnos_sentados) < numero_de_sillas:
+    #+end_src
+  - El comportamiento "raro" en Windows puede deberse a que en
+    sistemas derivados de CP/M, el fin de línea es un caracter
+    compuesto (caracteres CR+LF), en tanto que en Unix es un sólo
+    caracter (LF). Varias bibliotecas de bajo nivel causan la "purga"
+    del buffer de texto al detectar fin de línea — Y este manejo puede
+    causar que se porten diferente dependiendo del sistema.
+  - Al verificar si hay lugar para pasar y sentarte, estás abriendo la
+    posibilidad de una condición de carrera (¿recuerdas TOCTTOU? ¿Time
+    Of Check To Time Of Use?), podrían dos alumnos decidir al mismo
+    tiempo que pueden entrar, y uno de ellos quedaría bastante
+    incómodo. Además, si tienes algo como:
+    #+begin_src python
+      while True:
+	# (...)
+	if condicion:
+	  # Pasa y haz tus preguntas
+	else:
+	  # Date vuelta y regresa por donde viniste
+          print("Ya no hay lugar")
+    #+end_src
+    tienes una espera activa (aunque sea relativamente sencilla). Lo
+    que tendrías que hacer es dejar al alumno dormido frente a la
+    puerta, y /asumir que será exitoso/ cuando le toque.
+    - Bastaría con decir:
+      #+begin_src python
+	entra_cuarto = Semaphore(num_sillas)
+	while True:
+	  # (...)
+	  entra_cuarto.acquire()
+          # Pasa y haz tus preguntas
+      #+end_src
+    - Además de que te ahorraría preocuparte siquiera de qué hacer si
+      no hay lugar
+  - Implementaste correctamente la sincronización necesaria para
+    entrar al cuarto, pero todo el comportamiento relativo a las
+    preguntas quedó dentro de la lógica del profesor. El manejo de
+    =tenga_dudas= tendría que estar dentro de =alumnos()=, y éste es
+    el que debería decidir cuándo irse.
+- Calificación :: 2 + 2 + 1.5 + 2 = *7.5*
+
+** Luis Javier Montiel y Carolina Rodríguez
+- Documentación :: [[./MontielJavier-RodriguezCarolina/README.md][README.md]]
+- Código :: [[./MontielJavier-RodriguezCarolina/profe_alumnos.py][profe_alumnos.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Vaya! ¡Alguien que me hace caso y provee un =.gitignore=! Me hace
+    tener un poco de fé en la humanidad 😉
+  - Muy buena implementación. Bastante clara de leer, suficiente y
+    bien armada.
+- Calificación :: 2 + 2 + 3 + 3 = *10*
+
+** José Nava
+- Documentación :: [[./NavaJose/documentacion.txt][documentacion.txt]]
+- Código :: [[./NavaJose/alumnos_asesor.py][alumnos_asesor.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - No hay interacción real entre los alumnos y el profesor ☹
+  - Si sigues el flujo de tu programa, primero se ejecuta (y finaliza)
+    la función =profesor()=, y luego se lanzan los hilos de los alumnos
+    - El profesor maneja como un mutex su... ¿sección crítica? pero no
+      hay ningún tipo de interacción con los demás
+    - Los alumnos usan un mutex para agregarse e irse sumando a la
+      variable =alumnos=, pero a esas alturas, el profesor ya se fue
+    - Y, por alguna razón (‽), los alumnos lanzan a un nuevo profesor
+      – /Dos/ veces.
+    - Además, si bien usan el mutex para irse sumando en la variable
+      =alumnos=, todos los alumnos hacen que =alumnos = 0= al ir
+      finalizando... Y antes de llamar una última vez a =profesor()
+  - No puedo considerar esta solución como suficiente ☹
+- Calificación :: 2 + 1 + 1 + 1 = *5*
+
+** Francine Ochoa
+- Documentación :: [[./OchoaFrancine/Tarea 1 asesor.pdf][Tarea 1 asesor.pdf]]
+- Código :: [[./OchoaFrancine/asesor y alumnos.py][asesor y alumnos.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - A nivel estilístico en tu código: Evita escribir tu comentario
+    al término de la línea de la que estás hablando, se considera
+    mucho más legible poner el comentario en la línea inmediata
+    anterior. Esto es, en vez de:
+    #+begin_src python
+      mutex_atendido.release()#profe se desocupa
+    #+end_src
+    es más fácil leer:
+    #+begin_src python
+      # profe se desocupa
+      mutex_atendido.release()
+    #+end_src
+  - Modelas al planteamiento de que al profesor le gusta dormir
+    /fuera/ de los hilos. Esto es, =Profe despierta.= es impreso desde
+    tu hilo principal, antes de lanzar al profesor siquiera. Esto
+    significa que el profesor no va a poder nunca volver a dormir ☹
+  - La lista =alumno_preguntas= no está protegida de accesos
+    concurrentes; todos los alumnos agregan a ésta sus dudas, y el
+    profesor las va sacando una a una. Sí, Python nos ayuda siendo tan
+    malo para resolver concurrencia real, pero... ¡deberías
+    protegerla!
+  - Detalle idiomático: En Python, no necesitas crear una variable
+    aparte para iterar sobre una función cierto número de veces. Al
+    final de tu código, en vez de:
+    #+begin_src python
+    k=1
+    while k<alumnos_esperando:
+        # (...)
+	k += 1
+    #+end_src
+    es mucho más frecuente hacer:
+    #+begin_src python
+    for k in range(alumnos_esperando):
+        # (...)
+    #+end_src
+  - Calificación: 2 + 2 + 3 + 1 = *9*
+
+* Problema /De gatos y ratones/
+
+** David Guerrero y Adolfo Marcelo
+- Documentación :: [[./GuerreroDavid-MarceloAdolfo/Descripción.txt][Descripción.txt]]
+- Código :: [[./GuerreroDavid-MarceloAdolfo/Tarea1.py][Tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Bien identificado! — En este problema, a muchos no se les ocurre
+    emplear el patrón apagador.
+  - Siendo formales, la lógica está /casi/ al revés: Los ratones son
+    los que revisan si hay gatos en el cuarto
+    - Y, de haberlos, son los ratones quienes indican que se los
+      comieron; los gatos pasan por la vida sin pensar siquiera en los
+      ratones
+    - Pero la doy por válida, porque la lógica global es la
+      misma... aunque construida del lado opuesto
+  - ¡Me gusta que presenten el recuento final de ratones atrapados!
+  - Si acaso, me parece que la estructura del código está un poco
+    revuelta; se ve que comenzaron desarrollando de una manera y
+    fueron extrayendo lógica hacia funciones derivadas, aunque dejaron
+    rastros (p.ej. la declaración de variables globales que no usan en
+    algunas funciones, como =gatoEntrando= y =ratonEntrando=).
+  - Me parece que el uso del multiplex =animales= y del arreglo de
+    semáforos =platos= es redundante; son del mismo tamaño, y siempre
+    que operan sobre uno, operan sobre el otro también.
+- Calificación :: 2 + 2 + 3 + 3 = *10*
+
+* Problema /Santa Claus/
+
+  *Nota* Recibí la siguiente entrega; la alumna no asistió a la clase
+  en que resolvimos ese problema, pero cuando le pregunté al respecto,
+  me dijo que resolvería otro problema (y lo hizo). Esta entrega la
+  comento, aunque no reciba calificación.
+
+** Francine Ochoa
+- Documentación :: [[./OchoaFrancine/Tarea 1.pdf][Tarea 1.pdf]]
+- Código :: [[./OchoaFrancine/santa.py][santa.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Buena resolución! Se nota que la implementaste independiente de
+    la versión vista en clase (hay algunas diferencias de lógica
+  - El problema se ejecuta una sola vez: Podríamos decir que cada elfo
+    (de 200 que creaste) construye un sólo regalo, y los nueve renos
+    con Santa hacen un único viaje.
+    - ¿y qué pasa con los regalos que fueron creados después de la
+      entrega?
+    - Sugiero que =SantaClaus()=, =Renos()= y =Elfos()= tengan un
+      =while True:= para mantenerlos vivos para siempre, ¡como el
+      espíritu navideño! 😉 Aunque tendrías que revisar la lógica para
+      devolver el estado al inicial al terminar cada ciclo.
+  - En general, la sincronización fue bien manejada. Sólo me llamó la
+    atención que no proteges explícitamente de acceso concurrente a
+    =regalo_entregado=, y que los renos lanzan nueve veces la
+    señalización =despertar_santa= (una por cada individuo, debería
+    hacerlo únicamente uno de ellos)
+    - ¿O es que tiene que estar despierto muy despierto bien
+      despierto? ¡Una buena taza de café!
+
+* Problema /El cruce del río/
+
+** René Vázquez y Adán Guevara
+- Documentación :: [[./VazquezRene-GuevaraAdan/Documentacion.txt][Documentacion.txt]]
+- Código :: [[./VazquezRene-GuevaraAdan/Tarea1.py][Tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Vaya! ¡Alguien que me hace caso y provee un =.gitignore=! Me hace
+    tener un poco de fé en la humanidad 😉
+  - Pero... El código que presentan no es Python válido ☹
+    - Mezclan espacios y tabuladores. Python marca errores y se niega
+      a ejecutar:
+      #+begin_src text
+	$ python3 Tarea1.py 
+	  File "Tarea1.py", line 29
+	    mutex_canoa.release()                
+						^
+	TabError: inconsistent use of tabs and spaces in indentation
+      #+end_src
+    - Tienen algunos errores de dedazo importantes, como usar a veces
+      =acquiere()= donde debe decir =acquire()=
+    - Dedazos en nombres de variable (=serfQueue= vs. =SerfQueue=:
+      Python es sensible a mayúsculas)
+  - Manejan correctamente la lógica y señalización principal, pero
+    tanto =hacker()= como =serf()= verifican el caso de que sean dos y
+    dos. ¿No puede presentarse aquí una condición de carrera?
+    - Aunque la lógica que implementan es distinta: con 2 y 2,
+      =hacker()= libera a =hackerQueue= y a =serfQueue=, pero en el
+      mismo caso, =serf()= sólo libera a =hackerQueue=.
+- Calificación :: 2 + 0 + 2 + 1.5 = *5.5*
+
+* Problema /Intersección de caminos/
+
+** Daniel Zanabria
+- Documentación :: [[./ZanabriaDaniel/README.md][README.md]]
+- Código :: [[./ZanabriaDaniel/tarea1.py][tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - A nivel estilístico en tu código: Evita escribir tu comentario
+    al término de la línea de la que estás hablando, se considera
+    mucho más legible poner el comentario en la línea inmediata
+    anterior. Esto es, en vez de:
+    #+begin_src python
+      semaf.acquire() # Los carros están ocupando la calle esperando
+    #+end_src
+    es más fácil leer:
+    #+begin_src python
+      # Los carros están ocupando la calle esperando
+      semaf.acquire()
+    #+end_src
+  - Cae siempre en bloqueo mutuo ☹
+  - Por facilidad de seguimiento, y para ayudarte a depurar, recuerda
+    el principio *DRY*: /Don't Repeat Yourself/. En ambas funciones,
+    verificas el estado de =color=, y llevas a cabo acciones _muy_
+    similares. Considera el siguiente cuerpo para tu función
+    =semaforo():
+    #+begin_src python
+      colores = ['rojo', 'verde']
+      def semaforo(semaf, color): # 
+	  while True:
+	      print("semaforo en ", colores[color])
+	      semaf.acquire()
+	      time.sleep(5)
+	      siguiente_color = (color + 1) % len(colores)
+	      print("pasando a color ", colores[ siguiente_color ])
+	      color = siguiente_color
+	      semaf.release()
+    #+end_src
+    El resultado de la ejecución sería exactamente el mismo, y tienes
+    la libertad de añadir colores adicionales. Y si quieres modificar
+    el comportamiento, sólo hay que hacerlo una vez.
+  - El planteamiento indicaba que es “un cruce de caminos sin
+    señalamiento vial” — Lo que busca este problema es que manejes la
+    sincronización entre los coches que vayan llegando
+    - (pero... sigamos leyendo código, a ver si puedo encontrar qué
+      problema tiene tu implementación que se atora tan exitosamente)
+  - Inicializas =semaf= y =mutex= con =Semaphore(0)=, pero en ambos
+    dices en el comentario, =# Inicializamos semáforo en 1=. En
+    efecto, si =semaf= es inicializado a 1, tu =semaforo()= sí va
+    alternandose.
+    - Pero =carro()= genera una excepción: =UnboundLocalError: local
+      variable 'cola_carros' referenced before assignment=. Nunca la
+      inicializaste; probemos poniéndola como 0 antes del =while
+      True=. ¿Qué es loq ue buscas representar con ese entero? No la
+      reportas en ningún momento, sólo la haces crecer y decrecer
+      aleatoriamente...
+  - Tu =mutex= es innecesario: Sólo tienes un hilo para =carro()=, y
+    no hay nunca contra quién competir.
+  - =carro()= sigue cayendo en bloqueo mutuo...
+- Calificación :: 2 + 1 + 1.5 + 1.5 = *6*
+
+** Erik Zepeda
+- Documentación :: [[./ZepedaErik/Tarea1/Detalles_Tarea.txt][Detalles_Tarea.txt]]
+- Código :: [[./ZepedaErik/Tarea1/Tarea_1_ErikZepeda_Carros.py][Tarea_1_ErikZepeda_Carros.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - A nivel estilístico en tu código: Evita escribir tu comentario
+    al término de la línea de la que estás hablando, se considera
+    mucho más legible poner el comentario en la línea inmediata
+    anterior. Esto es, en vez de:
+    #+begin_src python
+    for dir in direcciones:  # se agregaran carros en las 4 direcciones posibles
+    #+end_src
+    es más fácil leer:
+    #+begin_src python
+    # se agregaran carros en las 4 direcciones posibles
+    for dir in direcciones:
+    #+end_src
+  - ¡No te disculpes por hacer las cosas bien! Me parece perfecto que
+    crearas una clase =Car= que heredara de =Thread=. ¡Más limpio que
+    lo que yo les enseñé! 😉 Requiere, sí, comprender un poco de POO,
+    pero si ya lo tienes... ¡Aprovéchalo!
+  - No entiendo por qué inicializas =semaforo= a 5. Lo estás usando
+    como un mutex para el área completa de cruce... Pero esto
+    significa que /no más de 5 autos/ podrían avanzar al mismo tiempo,
+    ¿no?
+    - Esto limita la cantidad de choques simultáneos, no los evita 😉
+      #+begin_src text
+	(...)
+	[INFO] (Hilo 4) Avanza y sale carro 4 con direccion: Derecha a izquierda
+	[INFO] (Hilo 8) El carro 8 tiene direccion: Abajo a arriba
+	[INFO] (Hilo 3) Avanza y sale carro 3 con direccion: Derecha a izquierda
+	[INFO] (Hilo 9) El carro 9 tiene direccion: Abajo a arriba
+	[INFO] (Hilo 6) Avanza y sale carro 6 con direccion: Derecha a izquierda
+	[INFO] (Hilo 8) Avanza y sale carro 8 con direccion: Abajo a arriba
+	[INFO] (Hilo 5) Avanza y sale carro 5 con direccion: Derecha a izquierda
+	(...)
+      #+end_src
+      ¡Pasaron a la vez autos en direcciones que se cruzan! Sin
+      embargo, inicializando tu semáforo con 1:
+      #+begin_src text
+	[INFO] (Hilo 1) El carro 1 tiene direccion: Izquierda a derecha
+	[INFO] (Hilo 1) Avanza y sale carro 1 con direccion: Izquierda a derecha
+	[INFO] (Hilo 2) El carro 2 tiene direccion: Derecha a izquierda
+	[INFO] (Hilo 2) Avanza y sale carro 2 con direccion: Derecha a izquierda
+	[INFO] (Hilo 3) El carro 3 tiene direccion: Derecha a izquierda
+	[INFO] (Hilo 3) Avanza y sale carro 3 con direccion: Derecha a izquierda
+	[INFO] (Hilo 4) El carro 4 tiene direccion: Derecha a izquierda
+	[INFO] (Hilo 4) Avanza y sale carro 4 con direccion: Derecha a izquierda
+      #+end_src
+  - Claro, no entraste en el refinamiento, con el que podrías modelar
+    el cruce como cuatro semáforos (uno para cada cuadrante), y
+    permitir que los autos se cruzaran en direcciones no-rivales. Pero
+    es únicamente eso, un refinamiento 😉
+- Calificación :: 2 + 2 + 2 + 2 = *8*

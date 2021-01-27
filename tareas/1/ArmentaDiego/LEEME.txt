@@ -1,0 +1,15 @@
+Saludos profesor:
+
+El problema que resolví fue el de el elevador
+
+Esta hecho en python3, la version con la que yo lo probé es python 3.6
+
+La estrategia que utilicé fue colocar un semaforo dentro del elevador de manera que no pudiera haber
+más de 5 personas a la vez utilizando el elevador. Los hilos(personas) se encargan de checar constantemente
+el estado del elevador, de manera que si el elevador se encuentra en el piso en que la persona está, esta intentara
+subirse. Una vez dentro se realizan las peticiones a los pisos destino y se agregan en una lista dentro del elevador que
+esta protegida con un lock.
+
+Las personas fuera del elevador realizan peticiones para que el elvador vaya al piso donde ellos estan, si el elevador llega a ese piso la peticion se levanta independientemente de si la persona pudo o no entrar, pero si la persona no logro entrar al elevador entonces esta vuelve a alzar la peticion (pica de nuevo el boton).
+
+Sin embargo todavía no está fncionando a la perfección, creo que hay cierta disparidad entre los tiempos del elevador y los delas personas.
