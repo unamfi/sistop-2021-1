@@ -1,0 +1,178 @@
+#+title: Profundizando en la administración de memoria: Revisión de entregas
+
+Presento la revisión de sus trabajos agrupada por artículo.
+
+* Dentro del proceso
+
+** How to create your own malloc library
+
+   [[https://medium.com/a-42-journey/how-to-create-your-own-malloc-library-b86fedd39b96][Liga al artículo]]
+
+*** Jonathan Calzada
+
+    - Documento :: [[./CalzadaJonathan/MinMap-CalzadaMartinez.pdf][MinMap-CalzadaMartinez.pdf]]
+    - Comentarios ::
+      - La tipografía que empleas no ayuda a leer el mapa; hay que
+        acercarse a las diferentes regiones para poder leer lo que
+        escribes... Y no es que la página esté tan saturada.
+      - El acomodo que utilizaste no mantiene un orden lógico sobre
+        las secciones del artículo, la lectura es un poco difícil; no
+        siempre es claro qué te hace “romper” un concepto para
+        distribuirlo en dos niveles (hay frases en un cuadro que
+        continúan en el siguiente sin que me quede muy clara la razón)
+    - Calificación :: 8.5
+
+*** Daniel Cruz
+
+    - Documento :: [[./CruzDaniel/MapaConceptual.pdf][MapaConceptual.pdf]]
+    - Comentarios ::
+      - ¡Muy buen resumen!
+    - Calificación :: 10
+
+*** Carolina Rodríguez
+
+    - Documento :: [[./RodriguezCarolina/tarea_3_malloc.png][tarea_3_malloc.png]], [[./RodriguezCarolina/tarea_3_malloc.pdf][tarea_3_malloc.pdf]]
+    - Comentarios ::
+      - ¡Muy buen resumen!
+    - Calificación :: 10
+
+*** René Vázquez
+
+    - Documento :: [[./Vazquez_Rene/tarea3.pdf][tarea3.pdf]]
+    - Comentarios ::
+      - Me parece muy intereasnte la manera en que estructuras el
+        “caminito” que hay que seguir por el mapa
+      - También, me gusta tu uso de “nodos” (obscuros) y “etiquetas de
+        vértices” (claros)
+    - Calificación :: 10
+
+** Inside memory management
+
+   [[https://developer.ibm.com/tutorials/l-memory/][Liga al artículo]]
+
+** Techniques for memory debugging: Demistifying C's greatest difficulty
+
+   [[https://www.ibm.com/developerworks/aix/library/au-memorytechniques.html][Liga al artículo]]
+
+*** Erik Zepeda
+
+    - Documento :: [[./ZepedaErik/Tarea3/Tarea3_ZepedaErik.pdf][Tarea3_ZepedaErik.pdf]]
+    - Comentarios ::
+      - La tipografía que empleas no ayuda a leer el mapa; hay que
+        acercarse a las diferentes regiones para poder leer lo que
+        escribes... Y no es que la página esté tan saturada.
+	- Hay algunas palabras cortadas automáticamente sin indicar,
+          que dificultan la lectura (/comportamiento/,
+          /implementaciones/, /prematuramente/...)
+      - Al hablar de /punteros colgantes/, los recuadros azul y
+        naranja repiten su texto.
+	- ¿Por qué /punteros colgantes/ aparece tanto en el primer y
+          segundo niveles (debajo de “Dos asignaciones de memoria
+          erróneas”)?
+      - Cuando mencionas “/violaciones de los límites de la matriz/”,
+        no es que con C puedas romper a la Matrix... Una traducción
+        correcta de /Array/ sería /arreglo/. Esto es, si defines un
+        arreglo =int data[100]=,  hacer referencia a cualquier
+        subíndice que no esté entre 0 y 99.
+      - Me parece interesante la parte que pones en el lado derecho,
+        las estrategias de programación de memoria. Hay varias
+        herramientas ampliamente disponibles ya hoy en día que cubren
+        estas funciones, como /duma/, /heaptrack/, /valgrind/, etc.
+    - Calificación :: 8.5
+
+* Entre los distintos procesos
+
+** Beginners guide on Linux memory management
+
+   [[https://www.golinuxcloud.com/tutorial-linux-memory-management-overview/][Liga al artículo]]
+
+*** Diego Armenta
+
+    - Documento :: [[./ArmentaDiego/tarea3.png][tarea3.png]]
+    - Comentarios :: 
+      - La tipografía que empleas no ayuda a leer el mapa; hay que
+        acercarse a las diferentes regiones para poder leer lo que
+        escribes... Y no es que la página esté tan saturada. Usas
+        varias combinaciones de colores con poco contraste.
+      - Tu mapa presenta una buena organización y cobertura del
+        material. ¡Buen trabajo!
+    - Calificación :: 10
+
+*** David Guerrero
+
+    - Documento :: [[./GuerreroDavid/gestionLinuxGuerreroDavid.jpeg][gestionLinuxGuerreroDavid.jpeg]]
+    - Comentarios ::
+      - Buena cobertura del contenido
+    - Calificación :: 10
+
+*** Javier Montiel
+
+    - Documento :: [[./MontielJavier/Administración de memória en linux.png][Administración de memória en linux.png]]
+    - Comentarios ::
+      - La tipografía que empleas no ayuda a leer el mapa; hay que
+        acercarse a las diferentes regiones para poder leer lo que
+        escribes... Y no es que la página esté tan saturada. Elegiste
+        un formato para tu información que no se ajusta a ningún tipo
+        de hoja o pantalla. ¡Considera cómo podrías haberlo presentado
+        de forma más conveniente!
+      - ¡Ojo con la ortografía! Es, en serio, parte muy importante de
+        tu desempeño profesional.
+	- /Memória/ no lleva acento
+	- /Valla/ es una palabra válida, pero tú querías escribir /vaya/
+	- No es lo mismo /una perdida/ que /una pérdida/ (caché →
+          dirty page → caso en el cual... → se mantiene → la perdida
+          de datos)
+	- Más que ortografía, esto es redacción. Pero de todos modos:
+          Redundancia en algunos conceptos: “Periódicamente los hilos
+          del kernel son despertados periódicamente”... (y de paso,
+          mayúscula donde no toca...)
+	- Dedazos, como “kerner” o “kernerl”
+	- Varios puntos menores, como falta de acentos que no alteran
+          significado...
+      - Dale una buena leída al contenido antes de enviarlo — Pegaste
+        sin fijarte al segundo bloque dentro del tercer bloque de tu
+        división izquierda.
+      - La cobertura de conceptos y nivel de explicación son bastante
+        buenos... pero el formato demerita tu entrega ☹
+    - Calificación :: 8.5
+
+*** José Nava
+
+    - Documento :: [[./NavaJose/Tarea3.jpg][Tarea3.jpg]]
+    - Comentarios ::
+      - La cobertura de los conceptos que haces es buena, aunque el
+        orden en que los conceptos se presentan en el artículo se
+        pierde por completo (comienzas por el centro y vas avanzando
+        hacia... ¿ambos costados?)
+    - Calificación :: 10
+
+*** Daniel Zanabria
+
+    - Documento :: [[./ZanabriaDaniel/Tarea 3_ Beginners guide on linux memory management.pdf][Tarea 3_ Beginners guide on linux memory
+      management.pdf]], [[./ZanabriaDaniel/New-Mind-Map.png][New-Mind-Map.png]]
+    - Comentarios ::
+      - Además de un mapa de conceptos presentas un resumen,
+        explicando los conceptos presentados con mayor hilación. ¡Muy
+        bien!
+	- Además, el mapa por sí sólo me parece suficientemente
+          descriptivo y bastante completo
+      - ¡Muy buen trabajo!
+    - Calificación :: 10
+
+** Exploring swap on FreeBSD: Free memory is wasted memory, or how to make the best use of swap
+
+   [[https://klarasystems.com/articles/exploring-swap-on-freebsd/][Liga al artículo]]
+
+*** Adolfo Marcelo
+
+    - Documento :: [[./MarceloAdolfo/Explorando Swap en FreeBSD_Marcelo_Romero_Adolfo.pdf][Explorando Swap en FreeBSD_Marcelo_Romero_Adolfo.pdf]]
+    - Comentarios ::
+      - En la columna izquierda, cuadro inferior... ¿Se te cortó el
+        texto? :-( Me quedé interesado por saber el por qué no
+        utilizar discos para swap... (no /pueden/ ser caché, porque
+        son más lentos; el caché definición tendría que ser más
+        rapido)
+      - Me parece un muy buen resumen, bien puesto en tus palabras. Me
+        parece claro que comprendiste bien el contenido del artículo.
+    - Calificación :: 10
+

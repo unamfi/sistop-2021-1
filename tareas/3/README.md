@@ -13,6 +13,11 @@ Como entrega, les voy a pedir un *control de lectura* (un *mapa
 conceptual*) del artículo que elijan. En esta ocasión, la tarea se
 realizará de forma _individual_.
 
+## Las calificaciones
+
+La revisión y calificación de de sus entregas [ya está
+disponible](./revision.org).
+
 ## Los artículos
 
 Los temas que cubre esta unidad pueden dividirse en la organización de
