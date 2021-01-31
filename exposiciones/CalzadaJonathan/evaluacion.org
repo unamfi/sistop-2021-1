@@ -1,8 +1,8 @@
-#+title: Evaluación de exposición: Git
+#+title: Evaluación de exposición: Diferencias entre distribuciones de GNU/Linux
 #+author: Gunnar Wolf
 
-- Tema presentado por :: Adolfo Marcelo y David Guerrero
-- Calificación global :: 9 * 0.3 + 8 * 0.7 = *8.3*
+- Tema presentado por :: Jonathan Calzada
+- Calificación global ::  9.375 * 0.3 + 7.88 * 0.7 = *8.328*
 
 * Comentarios
 
@@ -21,17 +21,25 @@ de la evaluación.
 |--------------+-------+------------+----------+-----------+-------|
 | Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
 |--------------+-------+------------+----------+-----------+-------|
-|           10 |    10 |         10 |      7.5 |       7.5 |   9.0 |
+|        9.375 | 9.375 |      9.375 |    9.375 |     9.375 | 9.375 |
 |--------------+-------+------------+----------+-----------+-------|
 
 ** Comentarios de los compañeros
 
-Su exposición recibió el siguiente comentario anonimizado por parte
-de sus compañeros:
+Su exposición recibió los siguientes comentarios anonimizados por
+parte de sus compañeros:
 
-- Me agrado su presentación y fue clara, sé que es un tema extenso
-  pero como sugerencia pudieron haber profundizado en algún subtema y
-  hacerlo un poco más demostrativo.
+- La información se expuso de manera muy clara y estructurada, como
+  unica recomendación es el es tener un tono de voz mas dinamico, ya
+  que se pude llegar a un punto el cual se puede perder al espectador
+- Hubo un par de ocaciones en las que no entendí que decías porque
+  bajaste un poco la voz junto con la pronunciacón de las palabras,
+  pero te entiendo compañero grabar un vídeo impone un poco, pero por
+  el contenido, bien :)
+- Que buena onda que un compañero nos comparta sobre el tema de las
+  distribuciones en linux, la verdad que siempre me tenia intrigado la
+  situacion de las distribuciones, por lo mismo que son tantas nunca
+  entendia por se veian diferente siempre que me hablaban de linux
 
 * Evaluación del docente
 
@@ -41,10 +49,10 @@ de sus compañeros:
 | Material desarrollado  |    0.2 |            5 |       1. |
 | Contenido              |    0.2 |           10 |       2. |
 | Fuentes bibliográficas |    0.1 |            5 |      0.5 |
-| Uso del tiempo         |    0.1 |            5 |      0.5 |
+| Uso del tiempo         |    0.1 |          7.5 |     0.75 |
 | Dominio del tema       |   0.15 |           10 |      1.5 |
-| Presencia              |   0.15 |           10 |      1.5 |
+| Presencia              |   0.15 |          7.5 |    1.125 |
 |------------------------+--------+--------------+----------|
-| *Global*               |        |              |     8.00 |
+| *Global*               |        |              |     7.88 |
 #+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
 

@@ -1,0 +1,60 @@
+#+title: Evaluación de exposición: Sistemas de inicio en Unix
+#+author: Gunnar Wolf
+
+- Tema presentado por :: José Nava
+- Calificación global :: 9.49 * 0.3 + 9 * 0.7 = *9.147*
+
+* Comentarios
+
+Dado que es una presentación en video, no puedo evaluar /dominio del
+tema/ y /presencia/ como lo hacemos habitualmente. Me centro en las
+respuestas que hagan a las preguntas de sus compañeros y en si la
+presentación "suena" leída directamente del material que prepararon o
+expuesta más libremente.
+
+* Evaluación grupal
+
+Esta evaluación proviene de la encuesta que llenaron en línea. No
+tengo acceso al desglose, por lo cual presento únicamente el resumen
+de la evaluación.
+
+|--------------+-------+------------+----------+-----------+-------|
+| Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
+|--------------+-------+------------+----------+-----------+-------|
+|         9.58 |  9.58 |         10 |     9.58 |      8.75 |  9.49 |
+|--------------+-------+------------+----------+-----------+-------|
+
+** Comentarios de los compañeros
+
+Su exposición recibió los siguientes comentarios anonimizados por
+parte de sus compañeros:
+
+- Me gusto mucho la información y la forma de explicar. La unica
+  recomendación que podria dar es que el tono de voz sea un poco menos
+  monótono con el fin de no perder al espectador
+- Es una gran exposición, probablemente algunos detalles respecto a la
+  claridad del presentador pero debido a las condiciones y a la
+  experiencia en este entorno supongo que es normal. En general esta
+  muy bien trabajado el tema y la exposición para nada es pesada
+- Me agrado conocer estos sistemas de arranque que unix de los que no
+  tenia en cuenta ya que no manejo mucho el sistema operativo pero es
+  bueno saberlo ya que uno como ingeniero en computacion tendra que
+  ver mucho de este tipo de cosas
+- Siempre muy claro, y muy bien explicado 10/10
+- Me agrado tu presentación y tu manera en que lo explicaste
+
+* Evaluación del docente
+
+| *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
+|------------------------+--------+--------------+----------|
+| Originalidad del tema  |    0.1 |          7.5 |     0.75 |
+| Material desarrollado  |    0.2 |           10 |       2. |
+| Contenido              |    0.2 |           10 |       2. |
+| Fuentes bibliográficas |    0.1 |            5 |      0.5 |
+| Uso del tiempo         |    0.1 |          7.5 |     0.75 |
+| Dominio del tema       |   0.15 |           10 |      1.5 |
+| Presencia              |   0.15 |           10 |      1.5 |
+|------------------------+--------+--------------+----------|
+| *Global*               |        |              |     9.00 |
+#+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
+
